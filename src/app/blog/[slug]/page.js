@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Section";
 import CtaBand from "@/components/CtaBand";
+import ShareBar from "@/components/ShareBar";
 import { posts, getPost } from "@/data/posts";
 import { site } from "@/data/site";
 
@@ -38,6 +39,8 @@ function formatDate(iso) {
 export default function BlogPostPage({ params }) {
   const post = getPost(params.slug);
   if (!post) notFound();
+
+  const postUrl = `${site.url}/blog/${post.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -104,18 +107,21 @@ export default function BlogPostPage({ params }) {
             {post.title}
           </h1>
 
-          <div className="mt-10 flex items-center gap-4 border-t border-white/5 pt-8">
-            <Image
-              src="/images/fahad-younus.jpg"
-              alt="Fahad Younus"
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-full border border-gold-500/40 object-cover"
-            />
-            <div>
-              <p className="font-medium text-cream-100">Fahad Younus, CPA, FCA</p>
-              <p className="text-sm text-cream-200/60">Founder, FPnA People Inc.</p>
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-white/5 pt-8">
+            <div className="flex items-center gap-4">
+              <Image
+                src="/images/fahad-younus.jpg"
+                alt="Fahad Younus"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full border border-gold-500/40 object-cover"
+              />
+              <div>
+                <p className="font-medium text-cream-100">Fahad Younus, CPA, FCA</p>
+                <p className="text-sm text-cream-200/60">Founder, FPnA People Inc.</p>
+              </div>
             </div>
+            <ShareBar url={postUrl} title={post.title} />
           </div>
         </div>
       </section>
@@ -128,7 +134,11 @@ export default function BlogPostPage({ params }) {
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
-            <div className="mt-16 rounded-sm border border-gold-500/20 bg-ink-700/40 p-8">
+            <div className="mt-12 border-t border-white/5 pt-8">
+              <ShareBar url={postUrl} title={post.title} />
+            </div>
+
+            <div className="mt-10 rounded-sm border border-gold-500/20 bg-ink-700/40 p-8">
               <p className="eyebrow mb-3">Work with us</p>
               <h3 className="heading-serif text-2xl md:text-3xl">
                 Want to discuss how this applies to your portfolio company?
