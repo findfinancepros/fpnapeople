@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Section";
@@ -104,9 +105,13 @@ export default function BlogPostPage({ params }) {
           </h1>
 
           <div className="mt-10 flex items-center gap-4 border-t border-white/5 pt-8">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gold-500/40 bg-ink-700 font-serif text-lg text-gold-400">
-              FY
-            </div>
+            <Image
+              src="/images/fahad-younus.jpg"
+              alt="Fahad Younus"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full border border-gold-500/40 object-cover"
+            />
             <div>
               <p className="font-medium text-cream-100">Fahad Younus, CPA, FCA</p>
               <p className="text-sm text-cream-200/60">Founder, FPnA People Inc.</p>
@@ -150,13 +155,24 @@ export default function BlogPostPage({ params }) {
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="rounded-sm border border-gold-500/20 bg-ink-700/60 p-8">
-              <p className="eyebrow mb-4">About the author</p>
-              <p className="font-serif text-xl text-cream-100">Fahad Younus</p>
-              <p className="text-sm text-gold-400">CPA, FCA</p>
+              <p className="eyebrow mb-4">About the Editor</p>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/images/fahad-younus.jpg"
+                  alt="Fahad Younus"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-full border border-gold-500/40 object-cover"
+                />
+                <div>
+                  <p className="font-serif text-xl text-cream-100">Fahad Younus</p>
+                  <p className="text-sm text-gold-400">CPA, FCA</p>
+                </div>
+              </div>
               <p className="mt-4 text-sm leading-relaxed text-cream-200/75">
                 Founder of FPnA People Inc. Fractional CFO and strategic finance advisor to
-                PE-backed and high-growth businesses across Canada and the US. Twenty years
-                across audit, FP&amp;A, and transaction advisory.
+                PE-backed and high-growth businesses across Canada and the US. Posts on this
+                blog are reviewed and edited by Fahad before publication.
               </p>
               <a
                 href={site.linkedin.fahad}

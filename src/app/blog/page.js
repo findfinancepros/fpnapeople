@@ -27,7 +27,7 @@ export default function BlogPage() {
         <div className="container-x py-24 md:py-32">
           <p className="eyebrow mb-4">Blog</p>
           <h1 className="heading-serif max-w-4xl text-5xl leading-tight md:text-6xl lg:text-7xl">
-            Writing for operators and sponsors.
+            Insights for Operators &amp; Sponsors.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-cream-200/75">
             Practical notes on PE advisory, fractional CFO work, and the reporting stacks that
