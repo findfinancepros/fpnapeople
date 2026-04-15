@@ -58,6 +58,51 @@ body {
   .link-gold {
     @apply text-gold-400 underline-offset-4 transition-colors hover:text-gold-300 hover:underline;
   }
+
+  .prose-blog {
+    @apply text-cream-200/85 text-lg leading-relaxed;
+  }
+  .prose-blog > * + * {
+    @apply mt-6;
+  }
+  .prose-blog p.lead {
+    @apply text-xl leading-relaxed text-cream-100;
+  }
+  .prose-blog h2 {
+    @apply heading-serif mt-16 text-3xl md:text-4xl leading-tight;
+  }
+  .prose-blog h3 {
+    @apply heading-serif mt-12 text-2xl leading-snug text-cream-100;
+  }
+  .prose-blog h2 + p,
+  .prose-blog h3 + p {
+    @apply mt-5;
+  }
+  .prose-blog ul {
+    @apply ml-0 list-none space-y-3 pl-0;
+  }
+  .prose-blog ul > li {
+    @apply relative pl-6 text-cream-200/85;
+  }
+  .prose-blog ul > li::before {
+    content: "";
+    @apply absolute left-0 top-3 h-1.5 w-1.5 rounded-full bg-gold-500;
+  }
+  .prose-blog ol {
+    @apply ml-5 list-decimal space-y-3 marker:text-gold-500;
+  }
+  .prose-blog ol > li {
+    @apply pl-2 text-cream-200/85;
+  }
+  .prose-blog strong {
+    @apply font-semibold text-cream-100;
+  }
+  .prose-blog a {
+    @apply text-gold-400 underline decoration-gold-500/40 underline-offset-4 transition-colors hover:text-gold-300 hover:decoration-gold-500;
+  }
+  .prose-blog blockquote {
+    @apply border-l-2 border-gold-500/50 pl-6 italic text-cream-200/75;
+  }
 }
 
 @layer utilities {

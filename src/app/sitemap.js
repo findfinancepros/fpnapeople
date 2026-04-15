@@ -1,4 +1,5 @@
 import { services, industries, caseStudies, site } from "@/data/site";
+import { posts } from "@/data/posts";
 
 export default function sitemap() {
   const now = new Date();
@@ -42,5 +43,12 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  return [...statics, ...serviceUrls, ...industryUrls, ...caseUrls];
+  const postUrls = posts.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...statics, ...serviceUrls, ...industryUrls, ...caseUrls, ...postUrls];
 }
