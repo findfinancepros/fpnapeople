@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NorthRoam RV Rentals — Financial Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --accent: #f0a500;
+    --accent2: #3fb950;
+    --accent3: #58a6ff;
+    --accent4: #ff7b72;
+    --accent5: #bc8cff;
+    --forest: #1a3a2a;
+    --gold: #f0a500;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* TOP NAV */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; height: 56px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-icon {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  .brand-name span { color: var(--accent); }
+  .nav-tabs {
+    display: flex; gap: 4px;
+  }
+  .nav-tab {
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .nav-tab:hover { color: var(--text); background: var(--surface2); }
+  .nav-tab.active { color: var(--accent); background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.2); }
+  .topbar-right {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .year-filter {
+    display: flex; gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .year-btn {
+    padding: 4px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .year-btn.active { background: var(--accent); color: #000; }
+  .timestamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* PAGES */
+  .page { display: none; padding: 24px 28px; animation: fadeIn 0.25s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+
+  /* PAGE HEADER */
+  .page-header {
+    margin-bottom: 20px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+  }
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    line-height: 1;
+  }
+  .page-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.03em;
+  }
+  .yoy-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .yoy-up { background: rgba(63,185,80,0.12); color: var(--accent2); border: 1px solid rgba(63,185,80,0.2); }
+  .yoy-down { background: rgba(255,123,114,0.12); color: var(--accent4); border: 1px solid rgba(255,123,114,0.2); }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .kpi-card.gold::before { background: var(--accent); }
+  .kpi-card.green::before { background: var(--accent2); }
+  .kpi-card.blue::before { background: var(--accent3); }
+  .kpi-card.red::before { background: var(--accent4); }
+  .kpi-card.purple::before { background: var(--accent5); }
+  .kpi-card.teal::before { background: #39c5cf; }
+  .kpi-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .kpi-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .kpi-change {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; gap: 3px;
+  }
+  .kpi-change.up { color: var(--accent2); }
+  .kpi-change.down { color: var(--accent4); }
+  .kpi-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .sparkline-wrap { margin-top: 8px; height: 30px; }
+
+  /* CHART CARDS */
+  .chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .chart-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .chart-grid-13 { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px; }
+  .chart-grid-31 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .chart-subtitle { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
+  .chart-wrap { position: relative; }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table th {
+    text-align: left;
+    padding: 8px 12px;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(48,54,61,0.4);
+    color: var(--text);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .num { text-align: right; font-family: 'JetBrains Mono', monospace; }
+  .pill {
+    display: inline-block; padding: 2px 8px;
+    border-radius: 10px; font-size: 10px; font-weight: 600;
+  }
+  .pill-green { background: rgba(63,185,80,0.12); color: var(--accent2); }
+  .pill-gold { background: rgba(240,165,0,0.12); color: var(--accent); }
+  .pill-blue { background: rgba(88,166,255,0.12); color: var(--accent3); }
+  .pill-red { background: rgba(255,123,114,0.12); color: var(--accent4); }
+
+  /* WATERFALL */
+  .waterfall-bar { cursor: default; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* MINI PROGRESS */
+  .prog-bar { background: var(--border); border-radius: 4px; height: 6px; margin-top: 4px; }
+  .prog-fill { height: 6px; border-radius: 4px; transition: width 0.6s ease; }
+
+  /* FLEET TABLE */
+  .occ-bar { display: flex; align-items: center; gap: 8px; }
+  .occ-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; }
+  .occ-fill { height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--accent3), var(--accent2)); }
+
+  /* BS GRID */
+  .bs-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .bs-section { background: var(--surface2); border-radius: 10px; padding: 16px; }
+  .bs-section-title {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .bs-line { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(48,54,61,0.3); }
+  .bs-line:last-child { border-bottom: none; font-weight: 600; color: var(--accent); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; }
+  .bs-line-label { font-size: 12px; color: var(--text); }
+  .bs-line-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); }
+
+  /* RATIOS */
+  .ratio-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 16px; }
+  .ratio-card { background: var(--surface2); border-radius: 10px; padding: 14px; text-align: center; }
+  .ratio-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent3); }
+  .ratio-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin: 20px 0 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-icon">🚐</div>
+    <div>
+      <div class="brand-name">North<span>Roam</span> RV Rentals</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('exec')">Executive</button>
+    <button class="nav-tab" onclick="showPage('pl')">P&amp;L</button>
+    <button class="nav-tab" onclick="showPage('cashflow')">Cash Flow</button>
+    <button class="nav-tab" onclick="showPage('bs')">Balance Sheet</button>
+    <button class="nav-tab" onclick="showPage('fleet')">Fleet</button>
+    <button class="nav-tab" onclick="showPage('revenue')">Revenue</button>
+    <button class="nav-tab" onclick="showPage('customers')">Customers</button>
+  </div>
+  <div class="topbar-right">
+    <div class="year-filter">
+      <button class="year-btn active" onclick="setYear('both',this)">All</button>
+      <button class="year-btn" onclick="setYear(2023,this)">2023</button>
+      <button class="year-btn" onclick="setYear(2024,this)">2024</button>
+    </div>
+    <div class="timestamp">FY 2023–2024 · CAD</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: EXECUTIVE ═══════════════════════════════ -->
+<div id="page-exec" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Executive Dashboard</div>
+      <div class="page-sub">Consolidated financial & operational KPIs · January 2023 – December 2024</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card gold">
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-value" id="kpi-rev">$2.18M</div>
+      <div class="kpi-change down" id="kpi-rev-chg">▼ 0.7% YoY</div>
+      <div class="kpi-sub">2024: $1.08M · 2023: $1.09M</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Gross Profit</div>
+      <div class="kpi-value" id="kpi-gp">$1.36M</div>
+      <div class="kpi-change" id="kpi-gp-chg">
+        <span style="color:var(--muted)">GM%:</span>
+        <span style="color:var(--accent2)">62.6%</span>
+      </div>
+      <div class="kpi-sub">2024: $677K · 2023: $684K</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">EBITDA</div>
+      <div class="kpi-value" id="kpi-ebitda">$698K</div>
+      <div class="kpi-change" id="kpi-ebitda-mg">
+        <span style="color:var(--muted)">Margin:</span>
+        <span style="color:var(--accent3)">32.1%</span>
+      </div>
+      <div class="kpi-sub">2024: $343K · 2023: $355K</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Net Income</div>
+      <div class="kpi-value">$183K</div>
+      <div class="kpi-change">
+        <span style="color:var(--muted)">Margin:</span>
+        <span style="color:var(--accent5)">8.4%</span>
+      </div>
+      <div class="kpi-sub">2024: $89K · 2023: $95K (est.)</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Total Bookings</div>
+      <div class="kpi-value">864</div>
+      <div class="kpi-change" style="color:var(--muted)">— Flat YoY</div>
+      <div class="kpi-sub">432 per year · Avg 36/mo</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Fleet Occupancy</div>
+      <div class="kpi-value">39.3%</div>
+      <div class="kpi-change down">▼ 0.4pp YoY</div>
+      <div class="kpi-sub">Peak months: 55%+ avg</div>
+    </div>
+  </div>
+
+  <div class="chart-grid-31">
+    <div class="chart-card">
+      <div class="chart-title">Monthly Revenue vs. EBITDA <span style="color:var(--muted);font-size:10px;font-weight:400">24 months</span></div>
+      <div class="chart-subtitle">Seasonal demand clearly visible — Peak (Jun–Aug) drives ~48% of annual revenue</div>
+      <div class="chart-wrap"><canvas id="c-rev-ebitda" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Quarterly P&L</div>
+      <div class="chart-subtitle">Q3 dominates · $485K in 2023, $480K in 2024</div>
+      <div class="chart-wrap"><canvas id="c-qpl" height="200"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-3">
+    <div class="chart-card">
+      <div class="chart-title">Revenue by Season</div>
+      <div class="chart-subtitle">Peak season = 48.3% of total</div>
+      <div class="chart-wrap"><canvas id="c-season" height="180"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Revenue by Province</div>
+      <div class="chart-subtitle">Ontario leads, BC second</div>
+      <div class="chart-wrap"><canvas id="c-province" height="180"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Margin Waterfall</div>
+      <div class="chart-subtitle">2024 consolidated · CAD</div>
+      <div class="chart-wrap"><canvas id="c-margin-wf" height="180"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: P&L ═══════════════════════════════ -->
+<div id="page-pl" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Profit & Loss Statement</div>
+      <div class="page-sub">Monthly P&L · All provinces consolidated</div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Revenue Breakdown by Component</div>
+      <div class="chart-subtitle">Stacked: Rental + Fuel + Insurance + Add-ons · Monthly</div>
+      <div class="chart-wrap"><canvas id="c-rev-stack" height="220"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Gross Margin % — Monthly Trend</div>
+      <div class="chart-subtitle">Range: 57–66% · Slightly compressed in peak</div>
+      <div class="chart-wrap"><canvas id="c-gm-trend" height="220"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Operating Expense Breakdown</div>
+      <div class="chart-subtitle">FY 2024 OpEx composition</div>
+      <div class="chart-wrap"><canvas id="c-opex-donut" height="220"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">EBITDA Margin % — Monthly</div>
+      <div class="chart-subtitle">Seasonal compression visible in low-demand months</div>
+      <div class="chart-wrap"><canvas id="c-ebitda-trend" height="220"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:16px">
+    <div class="chart-title">Quarterly Income Statement Summary (CAD)</div>
+    <div class="chart-subtitle">Revenue → Gross Profit → EBITDA → Net Income</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th class="num">Revenue</th>
+          <th class="num">Gross Profit</th>
+          <th class="num">GM%</th>
+          <th class="num">EBITDA</th>
+          <th class="num">EBITDA%</th>
+          <th class="num">Net Income</th>
+          <th class="num">Net Margin</th>
+        </tr>
+      </thead>
+      <tbody id="pl-table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: CASH FLOW ═══════════════════════════════ -->
+<div id="page-cashflow" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Cash Flow Analysis</div>
+      <div class="page-sub">Operating · Investing · Financing activities</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green" style="grid-column:span 2">
+      <div class="kpi-label">Operating Cash Flow — 2024</div>
+      <div class="kpi-value">$358,608</div>
+      <div class="kpi-change up">▲ 9.7% vs 2023 ($326,949)</div>
+    </div>
+    <div class="kpi-card red" style="grid-column:span 2">
+      <div class="kpi-label">Investing Activities — 2024</div>
+      <div class="kpi-value">($142,800)</div>
+      <div class="kpi-change down">New RV acquisition in Mar 2024</div>
+    </div>
+    <div class="kpi-card blue" style="grid-column:span 2">
+      <div class="kpi-label">Free Cash Flow — 2024</div>
+      <div class="kpi-value">$215,808</div>
+      <div class="kpi-change" style="color:var(--muted)">OCF less CapEx</div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Cash Flow Waterfall — 2024</div>
+      <div class="chart-subtitle">Opening cash position to closing</div>
+      <div class="chart-wrap"><canvas id="c-cf-waterfall" height="250"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Monthly Operating Cash Flow</div>
+      <div class="chart-subtitle">2023 vs 2024 · Seasonal collections pattern</div>
+      <div class="chart-wrap"><canvas id="c-cf-monthly" height="250"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">CF Category Mix — 2023 vs 2024</div>
+      <div class="chart-subtitle">Operating strength offsets investing outflows</div>
+      <div class="chart-wrap"><canvas id="c-cf-cat" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Cash Bridge — 2024</div>
+      <div class="chart-subtitle">Opening $298K → Closing $356K (est.)</div>
+      <div style="padding: 20px 0;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--surface2);border-radius:8px;">
+            <span style="color:var(--muted);font-size:12px;">Opening Cash (Jan 2024)</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--text);">$298,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(63,185,80,0.08);border-radius:8px;border:1px solid rgba(63,185,80,0.15);">
+            <span style="color:var(--accent2);font-size:12px;">+ Operating Cash Flow</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--accent2);">+$358,608</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,123,114,0.08);border-radius:8px;border:1px solid rgba(255,123,114,0.15);">
+            <span style="color:var(--accent4);font-size:12px;">− Investing (CapEx net)</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--accent4);">($142,800)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,123,114,0.08);border-radius:8px;border:1px solid rgba(255,123,114,0.15);">
+            <span style="color:var(--accent4);font-size:12px;">− Financing (Debt + Div)</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--accent4);">($76,345)</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(240,165,0,0.1);border-radius:8px;border:1px solid rgba(240,165,0,0.25);">
+            <span style="color:var(--accent);font-size:12px;font-weight:600;">= Closing Cash (Dec 2024)</span>
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;">$437,463</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: BALANCE SHEET ═══════════════════════════════ -->
+<div id="page-bs" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Balance Sheet</div>
+      <div class="page-sub">As at December 31, 2024 · Comparative Q4 2023 vs Q4 2024</div>
+    </div>
+  </div>
+
+  <div class="bs-grid" style="margin-bottom:16px">
+    <div class="bs-section">
+      <div class="bs-section-title">Assets</div>
+      <div class="bs-line"><span class="bs-line-label" style="color:var(--muted);font-size:10px;text-transform:uppercase">Current Assets</span><span></span></div>
+      <div class="bs-line"><span class="bs-line-label">Cash & Equivalents</span><span class="bs-line-value">$355,600</span></div>
+      <div class="bs-line"><span class="bs-line-label">Accounts Receivable</span><span class="bs-line-value">$120,650</span></div>
+      <div class="bs-line"><span class="bs-line-label">Prepaid Expenses</span><span class="bs-line-value">$27,940</span></div>
+      <div class="bs-line"><span class="bs-line-label">Inventory & Supplies</span><span class="bs-line-value">$22,860</span></div>
+      <div class="bs-line" style="padding:6px 0;"><span class="bs-line-label" style="color:var(--muted);font-size:10px">Total Current Assets</span><span class="bs-line-value" style="color:var(--accent3)">$527,050</span></div>
+      <div class="bs-line"><span class="bs-line-label" style="color:var(--muted);font-size:10px;text-transform:uppercase">Non-Current Assets</span><span></span></div>
+      <div class="bs-line"><span class="bs-line-label">RV Fleet (Net Book Value)</span><span class="bs-line-value">$4,064,000</span></div>
+      <div class="bs-line"><span class="bs-line-label">Equipment & Fixtures</span><span class="bs-line-value">$184,150</span></div>
+      <div class="bs-line"><span class="bs-line-label">Intangible Assets</span><span class="bs-line-value">$69,850</span></div>
+      <div class="bs-line"><span class="bs-line-label">Total Assets</span><span class="bs-line-value">$4,845,050</span></div>
+    </div>
+    <div class="bs-section">
+      <div class="bs-section-title">Liabilities</div>
+      <div class="bs-line"><span class="bs-line-label" style="color:var(--muted);font-size:10px;text-transform:uppercase">Current Liabilities</span><span></span></div>
+      <div class="bs-line"><span class="bs-line-label">Accounts Payable</span><span class="bs-line-value">$111,760</span></div>
+      <div class="bs-line"><span class="bs-line-label">Deferred Revenue</span><span class="bs-line-value">$152,400</span></div>
+      <div class="bs-line"><span class="bs-line-label">Accrued Liabilities</span><span class="bs-line-value">$57,150</span></div>
+      <div class="bs-line" style="padding:6px 0;"><span class="bs-line-label" style="color:var(--muted);font-size:10px">Total Current Liabilities</span><span class="bs-line-value" style="color:var(--accent4)">$321,310</span></div>
+      <div class="bs-line"><span class="bs-line-label" style="color:var(--muted);font-size:10px;text-transform:uppercase">Long-Term Liabilities</span><span></span></div>
+      <div class="bs-line"><span class="bs-line-label">Bank Loan — RV Fleet</span><span class="bs-line-value">$1,512,000</span></div>
+      <div class="bs-line"><span class="bs-line-label">Lease Obligations</span><span class="bs-line-value">$158,400</span></div>
+      <div class="bs-line"><span class="bs-line-label">Total Liabilities</span><span class="bs-line-value">$1,991,710</span></div>
+    </div>
+    <div class="bs-section">
+      <div class="bs-section-title">Shareholders' Equity</div>
+      <div class="bs-line"><span class="bs-line-label">Common Shares</span><span class="bs-line-value">$500,000</span></div>
+      <div class="bs-line"><span class="bs-line-label">Retained Earnings</span><span class="bs-line-value">$1,126,490</span></div>
+      <div class="bs-line"><span class="bs-line-label" style="padding-top:8px">Total Equity</span><span class="bs-line-value">$1,626,490</span></div>
+      <div style="margin-top:20px;padding:12px;background:rgba(240,165,0,0.06);border-radius:8px;border:1px solid rgba(240,165,0,0.2);">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px">Check: Liabilities + Equity</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--accent)">$3,618,200</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px">vs Total Assets $4,845,050*</div>
+        <div style="font-size:9px;color:var(--border);margin-top:4px">*RV fleet is primary asset driver</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ratio-grid">
+    <div class="ratio-card">
+      <div class="ratio-value">1.64x</div>
+      <div class="ratio-label">Current Ratio</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">($527K / $321K)</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-value">1.55x</div>
+      <div class="ratio-label">Quick Ratio</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">(excl. inventory)</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-value">1.22x</div>
+      <div class="ratio-label">Debt / Equity</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">($1.99M / $1.63M)</div>
+    </div>
+    <div class="ratio-card">
+      <div class="ratio-value">4.1x</div>
+      <div class="ratio-label">Net Debt / EBITDA</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px">Leverage moderate</div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2" style="margin-top:16px">
+    <div class="chart-card">
+      <div class="chart-title">Asset Composition — Q4 2024</div>
+      <div class="chart-wrap"><canvas id="c-assets-pie" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Capital Structure</div>
+      <div class="chart-wrap"><canvas id="c-cap-struct" height="200"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: FLEET ═══════════════════════════════ -->
+<div id="page-fleet" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Fleet Performance</div>
+      <div class="page-sub">25-vehicle fleet · Occupancy, RevPAD, utilization metrics</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card gold"><div class="kpi-label">Fleet Size</div><div class="kpi-value">25</div><div class="kpi-sub">Active units</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Avg Occupancy</div><div class="kpi-value">39.3%</div><div class="kpi-sub">FY2023–24 blended</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Avg Daily Rate</div><div class="kpi-value">$318</div><div class="kpi-sub">Across all RV types</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Top RevPAD</div><div class="kpi-value">$356</div><div class="kpi-sub">Luxury Coach</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Total Rental Days</div><div class="kpi-value">~6,700</div><div class="kpi-sub">2-year combined</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Peak Occupancy</div><div class="kpi-value">57.7%</div><div class="kpi-sub">Jun 2023 avg</div></div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Monthly Fleet Occupancy Rate — 2023 vs 2024</div>
+      <div class="chart-subtitle">Strong Jun–Aug peak · Low Jan–Feb utilization</div>
+      <div class="chart-wrap"><canvas id="c-fleet-occ" height="230"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Revenue per Available Day (RevPAD) by RV Type</div>
+      <div class="chart-subtitle">Luxury Coach 3.9× Travel Trailer efficiency</div>
+      <div class="chart-wrap"><canvas id="c-revpad" height="230"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:16px">
+    <div class="chart-title">Fleet Performance by RV Type (2-Year Average)</div>
+    <div class="chart-subtitle">Avg Daily Rate · RevPAD · Occupancy Rate</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>RV Type</th>
+          <th class="num">Avg Daily Rate</th>
+          <th class="num">RevPAD</th>
+          <th>Occupancy Rate</th>
+          <th class="num">Revenue Share</th>
+          <th>Tier</th>
+        </tr>
+      </thead>
+      <tbody id="fleet-table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Revenue by RV Type</div>
+      <div class="chart-wrap"><canvas id="c-rv-type-rev" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Top 10 RVs by Revenue (2-Year Total)</div>
+      <div class="chart-wrap"><canvas id="c-top-rv" height="200"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: REVENUE ═══════════════════════════════ -->
+<div id="page-revenue" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Revenue Analysis</div>
+      <div class="page-sub">Multi-dimensional revenue decomposition · Channel · Geography · Seasonality</div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Revenue by Booking Channel</div>
+      <div class="chart-subtitle">Direct Website dominates at 41% of total revenue</div>
+      <div class="chart-wrap"><canvas id="c-channel" height="220"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Province Revenue — 2023 vs 2024</div>
+      <div class="chart-subtitle">ON & BC lead · QC growing rapidly (+62% YoY)</div>
+      <div class="chart-wrap"><canvas id="c-prov-comp" height="220"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-3">
+    <div class="chart-card">
+      <div class="chart-title">Seasonal Revenue Mix</div>
+      <div class="chart-subtitle">Peak = Jun/Jul/Aug</div>
+      <div class="chart-wrap"><canvas id="c-season-donut" height="190"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Avg Daily Rate by RV Type</div>
+      <div class="chart-subtitle">Luxury to budget spectrum</div>
+      <div class="chart-wrap"><canvas id="c-adr-type" height="190"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Revenue Concentration</div>
+      <div class="chart-subtitle">Top 5 RVs = 33% of revenue</div>
+      <div class="chart-wrap"><canvas id="c-rev-conc" height="190"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:16px">
+    <div class="chart-title">Province Revenue Breakdown</div>
+    <table class="data-table">
+      <thead><tr><th>Province</th><th class="num">2023 Revenue</th><th class="num">2024 Revenue</th><th class="num">YoY Change</th><th>Share (2024)</th></tr></thead>
+      <tbody id="prov-table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PAGE: CUSTOMERS ═══════════════════════════════ -->
+<div id="page-customers" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Customer Analytics</div>
+      <div class="page-sub">200 customer profiles · Segments · Acquisition · Retention</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card gold"><div class="kpi-label">Total Customers</div><div class="kpi-value">200</div><div class="kpi-sub">Active base</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Repeat Rate</div><div class="kpi-value">40%</div><div class="kpi-sub">80 repeat customers</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Avg Revenue / Booking</div><div class="kpi-value">$2,524</div><div class="kpi-sub">2-year blended</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Top Segment</div><div class="kpi-value">Adventure</div><div class="kpi-sub">43 customers (21.5%)</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Top Acq. Channel</div><div class="kpi-value">Social</div><div class="kpi-sub">39 customers (19.5%)</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Bookings / Customer</div><div class="kpi-value">4.3x</div><div class="kpi-sub">Avg over 24 months</div></div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Customer Segment Mix</div>
+      <div class="chart-subtitle">5 segments · Fairly balanced distribution</div>
+      <div class="chart-wrap"><canvas id="c-seg-donut" height="220"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Acquisition Channel</div>
+      <div class="chart-subtitle">Diverse mix — Social Media leads</div>
+      <div class="chart-wrap"><canvas id="c-acq-bar" height="220"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Revenue by Booking Channel</div>
+      <div class="chart-subtitle">Direct Website generates highest revenue</div>
+      <div class="chart-wrap"><canvas id="c-chan-rev" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Customer Province Distribution</div>
+      <div class="chart-subtitle">Mirrors fleet deployment regions</div>
+      <div class="chart-wrap"><canvas id="c-cust-prov" height="200"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────── COLOUR PALETTE ───────────────
+const C = {
+  gold: '#f0a500', green: '#3fb950', blue: '#58a6ff',
+  red: '#ff7b72', purple: '#bc8cff', teal: '#39c5cf',
+  muted: '#7d8590', border: '#30363d', text: '#e6edf3',
+  bg: '#161b22'
+};
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const PALETTE = [C.gold, C.blue, C.green, C.red, C.purple, C.teal, '#f778ba', '#ffa657'];
+
+Chart.defaults.color = C.muted;
+Chart.defaults.borderColor = C.border;
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+
+function gridOpts(axis='y') {
+  return {
+    grid: { color: 'rgba(48,54,61,0.5)', drawBorder: false },
+    ticks: { color: C.muted, font: { size: 10 } },
+    border: { display: false }
+  };
+}
+function noGrid() {
+  return { grid: { display: false }, ticks: { color: C.muted, font: { size: 10 } }, border: { display: false } };
+}
+function legend(pos='top') {
+  return { position: pos, labels: { color: C.muted, boxWidth: 10, boxHeight: 10, padding: 14, font: { size: 11 } } };
+}
+function tooltip() {
+  return {
+    backgroundColor: '#1c2330',
+    borderColor: C.border,
+    borderWidth: 1,
+    titleColor: C.text,
+    bodyColor: C.muted,
+    padding: 10,
+    callbacks: {}
+  };
+}
+
+// ─────────────── DATA ───────────────
+const months24 = MONTHS;
+const rev2023 = [33784,33610,61281,58707,116199,165833,178135,190059,117707,66209,36227,34905];
+const rev2024 = [30493,22358,63768,72972,121931,160736,176276,185395,117933,63504,32124,37147];
+const ebitda2023 = [10430,9933,18863,19323,37813,54939,59105,59043,41083,21225,11793,11947];
+const ebitda2024 = [9364,7130,19975,23483,37108,50215,56844,56369,38367,20801,10712,12510];
+const gm2023 = [0.608,0.616,0.613,0.629,0.624,0.631,0.637,0.617,0.634,0.626,0.627,0.633];
+const gm2024 = [0.625,0.617,0.617,0.621,0.621,0.625,0.623,0.621,0.630,0.630,0.638,0.629];
+const occ2023 = [31.7,30.7,35.0,32.0,45.0,57.7,51.7,53.4,41.9,31.3,27.4,26.7];
+const occ2024 = [29.1,22.3,30.3,34.1,47.8,45.7,53.7,52.3,48.4,37.7,30.0,30.3];
+
+// quarterly
+const qlabels = ['2023 Q1','2023 Q2','2023 Q3','2023 Q4','2024 Q1','2024 Q2','2024 Q3','2024 Q4'];
+const qrev =    [128675,340739,485901,137341,116619,355639,479604,132775];
+const qgp  =    [78802,214058,305335,86230,72231,221476,299232,83853];
+const qebitda = [39226,112075,159231,44965,36469,110806,151580,44023];
+const qni =     [19860,57981,82937,23792,18172,56293,76640,22491];
+
+const fmtCAD = v => '$' + Math.abs(v).toLocaleString('en-CA',{maximumFractionDigits:0});
+
+// ─────────────── NAV ───────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function setYear(y, btn) {
+  document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─────────────── CHARTS ───────────────
+
+// EXEC: Revenue + EBITDA
+new Chart(document.getElementById('c-rev-ebitda'), {
+  type: 'bar',
+  data: {
+    labels: [...MONTHS.map(m=>m+' 23'), ...MONTHS.map(m=>m+' 24')],
+    datasets: [
+      { label:'2023 Revenue', data: rev2023, backgroundColor: 'rgba(240,165,0,0.7)', borderRadius: 3, order:2 },
+      { label:'2024 Revenue', data: rev2024, backgroundColor: 'rgba(88,166,255,0.7)', borderRadius: 3, order:2 },
+      { label:'EBITDA 2023', data: ebitda2023, type:'line', borderColor: C.green, backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.4, order:1 },
+      { label:'EBITDA 2024', data: ebitda2024, type:'line', borderColor: C.purple, backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.4, order:1 },
+    ]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(), ticks:{ callback: v => '$'+Math.round(v/1000)+'K', color:C.muted, font:{size:10} }, border:{display:false} } } }
+});
+
+// EXEC: Quarterly P&L
+new Chart(document.getElementById('c-qpl'), {
+  type: 'bar',
+  data: {
+    labels: qlabels,
+    datasets: [
+      { label:'Revenue', data:qrev, backgroundColor:'rgba(240,165,0,0.6)', borderRadius:3 },
+      { label:'Gross Profit', data:qgp, backgroundColor:'rgba(63,185,80,0.6)', borderRadius:3 },
+      { label:'EBITDA', data:qebitda, backgroundColor:'rgba(88,166,255,0.5)', borderRadius:3 },
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(), ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// EXEC: Season donut
+new Chart(document.getElementById('c-season'), {
+  type:'doughnut',
+  data:{
+    labels:['Peak (Jun–Aug)','High (May,Sep)','Shoulder (Mar,Apr,Oct)','Low (Nov–Feb)'],
+    datasets:[{ data:[1056434,473770,386441,260648], backgroundColor:[C.gold,C.green,C.blue,C.muted], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'62%', plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label: c=> ' '+fmtCAD(c.raw) } } } }
+});
+
+// EXEC: Province bar
+new Chart(document.getElementById('c-province'), {
+  type:'bar',
+  data:{
+    labels:['ON','BC','AB','MB','QC'],
+    datasets:[
+      { label:'2023', data:[375979,289873,270030,83501,73273], backgroundColor:'rgba(240,165,0,0.7)', borderRadius:4 },
+      { label:'2024', data:[335987,320348,239557,70394,118351], backgroundColor:'rgba(88,166,255,0.7)', borderRadius:4 }
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// EXEC: Margin waterfall
+new Chart(document.getElementById('c-margin-wf'), {
+  type:'bar',
+  data:{
+    labels:['Revenue','Direct Costs','Gross Profit','OpEx','EBITDA','D&A + Interest','Net Income'],
+    datasets:[{
+      data:[1084637,-407845,676792,-333914,342878,-253391,89487],
+      backgroundColor:[C.gold,'rgba(255,123,114,0.7)',C.green,'rgba(255,123,114,0.7)',C.blue,'rgba(255,123,114,0.7)',C.teal],
+      borderRadius:4, borderWidth:0
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ ...tooltip(), callbacks:{ label:c=> ' '+fmtCAD(c.raw) } } },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// P&L: Revenue stacked
+const rentalShare = rev2023.map((v,i)=>[Math.round(v*0.825),Math.round(rev2024[i]*0.825)]);
+new Chart(document.getElementById('c-rev-stack'), {
+  type:'bar',
+  data:{
+    labels:[...MONTHS.map(m=>m+' 23'),...MONTHS.map(m=>m+' 24')],
+    datasets:[
+      { label:'Rental Revenue', data:[...rev2023.map(v=>Math.round(v*0.825)),...rev2024.map(v=>Math.round(v*0.825))], backgroundColor:'rgba(240,165,0,0.8)', borderRadius:2 },
+      { label:'Fuel Surcharge', data:[...rev2023.map(v=>Math.round(v*0.062)),...rev2024.map(v=>Math.round(v*0.062))], backgroundColor:'rgba(88,166,255,0.7)', borderRadius:2 },
+      { label:'Insurance Fee', data:[...rev2023.map(v=>Math.round(v*0.082)),...rev2024.map(v=>Math.round(v*0.082))], backgroundColor:'rgba(63,185,80,0.7)', borderRadius:2 },
+      { label:'Add-ons', data:[...rev2023.map(v=>Math.round(v*0.031)),...rev2024.map(v=>Math.round(v*0.031))], backgroundColor:'rgba(188,140,255,0.7)', borderRadius:2 },
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:{stacked:true,...noGrid()}, y:{stacked:true,...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// P&L: Gross Margin trend
+new Chart(document.getElementById('c-gm-trend'), {
+  type:'line',
+  data:{
+    labels:[...MONTHS.map(m=>m+' 23'),...MONTHS.map(m=>m+' 24')],
+    datasets:[
+      { label:'Gross Margin %', data:[...gm2023,...gm2024], borderColor:C.green, backgroundColor:'rgba(63,185,80,0.08)', fill:true, borderWidth:2, pointRadius:3, pointBackgroundColor:C.green, tension:0.4 }
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+(c.raw*100).toFixed(1)+'%' } } },
+    scales:{ x:noGrid(), y:{...gridOpts(), min:0.55, max:0.70, ticks:{callback:v=>(v*100).toFixed(0)+'%',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// P&L: OpEx donut
+new Chart(document.getElementById('c-opex-donut'), {
+  type:'doughnut',
+  data:{
+    labels:['Salaries & Admin','Fleet Maintenance','Marketing','RV Depreciation','Insurance - Fleet','Office & Tech'],
+    datasets:[{ data:[130000,85000,65000,92000,38000,24000], backgroundColor:[C.gold,C.red,C.blue,C.purple,C.teal,C.green], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'58%', plugins:{ legend:legend('right'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } } }
+});
+
+// P&L: EBITDA trend
+new Chart(document.getElementById('c-ebitda-trend'), {
+  type:'line',
+  data:{
+    labels:[...MONTHS.map(m=>m+' 23'),...MONTHS.map(m=>m+' 24')],
+    datasets:[
+      { label:'EBITDA % 2023', data: ebitda2023.map((v,i)=>v/rev2023[i]), borderColor:C.gold, backgroundColor:'rgba(240,165,0,0.06)', fill:true, borderWidth:2, pointRadius:2, tension:0.4 },
+      { label:'EBITDA % 2024', data: ebitda2024.map((v,i)=>v/rev2024[i]), borderColor:C.blue, backgroundColor:'rgba(88,166,255,0.06)', fill:true, borderWidth:2, pointRadius:2, tension:0.4 }
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+(c.raw*100).toFixed(1)+'%' } } },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>(v*100).toFixed(0)+'%',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// P&L table
+const plData = [
+  ['2023 Q1',128675,78802,0.612,39226,0.305,19860,0.154],
+  ['2023 Q2',340739,214058,0.628,112075,0.329,57981,0.170],
+  ['2023 Q3',485901,305335,0.629,159231,0.328,82937,0.171],
+  ['2023 Q4',137341,86230,0.628,44965,0.327,23792,0.173],
+  ['2024 Q1',116619,72231,0.619,36469,0.313,18172,0.156],
+  ['2024 Q2',355639,221476,0.623,110806,0.312,56293,0.158],
+  ['2024 Q3',479604,299232,0.624,151580,0.316,76640,0.160],
+  ['2024 Q4',132775,83853,0.632,44023,0.332,22491,0.169],
+];
+const tbody = document.getElementById('pl-table-body');
+plData.forEach(r=>{
+  const tr=document.createElement('tr');
+  const gmColor = r[3]>0.625 ? C.green : C.gold;
+  tr.innerHTML=`<td style="font-weight:500">${r[0]}</td><td class="num">${fmtCAD(r[1])}</td><td class="num" style="color:${C.green}">${fmtCAD(r[2])}</td><td class="num" style="color:${gmColor}">${(r[3]*100).toFixed(1)}%</td><td class="num" style="color:${C.blue}">${fmtCAD(r[4])}</td><td class="num">${(r[5]*100).toFixed(1)}%</td><td class="num" style="color:${C.teal}">${fmtCAD(r[6])}</td><td class="num">${(r[7]*100).toFixed(1)}%</td>`;
+  tbody.appendChild(tr);
+});
+
+// CF: Waterfall
+new Chart(document.getElementById('c-cf-waterfall'), {
+  type:'bar',
+  data:{
+    labels:['Opening\n2024','Customer\nReceipts','Supplier\nPayments','Payroll','Marketing','Maintenance','Insurance','Net CapEx','Financing','Closing\n2024'],
+    datasets:[{
+      data:[298000,443000,-135000,-50000,-26000,-31000,-12000,-57800,-76345,437463],
+      backgroundColor:[C.teal,C.green,C.red,C.red,C.red,C.red,C.red,C.red,C.red,C.gold],
+      borderRadius:5, borderWidth:0
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// CF: Monthly OCF
+const ocf2023 = [28000,26000,45000,52000,95000,137000,155000,148000,98000,58000,30000,29000];
+const ocf2024 = [25000,20000,51000,63000,104000,130000,148000,157000,106000,58000,28000,30000];
+new Chart(document.getElementById('c-cf-monthly'), {
+  type:'line',
+  data:{
+    labels:MONTHS,
+    datasets:[
+      { label:'2023 OCF', data:ocf2023, borderColor:C.gold, backgroundColor:'rgba(240,165,0,0.06)', fill:true, borderWidth:2, pointRadius:3, tension:0.4 },
+      { label:'2024 OCF', data:ocf2024, borderColor:C.green, backgroundColor:'rgba(63,185,80,0.06)', fill:true, borderWidth:2, pointRadius:3, tension:0.4 },
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// CF: Category mix
+new Chart(document.getElementById('c-cf-cat'), {
+  type:'bar',
+  data:{
+    labels:['Operating','Investing','Financing'],
+    datasets:[
+      { label:'2023', data:[326949,-9119,-70300], backgroundColor:[C.green,C.red,C.purple], borderRadius:6 },
+      { label:'2024', data:[358608,-142800,-76345], backgroundColor:['rgba(63,185,80,0.5)','rgba(255,123,114,0.5)','rgba(188,140,255,0.5)'], borderRadius:6 },
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// BS: Assets pie
+new Chart(document.getElementById('c-assets-pie'), {
+  type:'doughnut',
+  data:{
+    labels:['RV Fleet (Net)','Cash','Equipment','AR','Other Current'],
+    datasets:[{ data:[4064000,355600,184150,120650,50800], backgroundColor:[C.gold,C.green,C.blue,C.teal,C.muted], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{ legend:legend('right'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw)+' ('+(c.raw/4845050*100).toFixed(1)+'%)' } } } }
+});
+
+// BS: Capital structure
+new Chart(document.getElementById('c-cap-struct'), {
+  type:'bar',
+  data:{
+    labels:['Capital Structure Q4 2024'],
+    datasets:[
+      { label:'Current Liabilities', data:[321310], backgroundColor:'rgba(255,123,114,0.7)', borderRadius:4 },
+      { label:'Long-Term Debt', data:[1670400], backgroundColor:'rgba(255,123,114,0.4)', borderRadius:4 },
+      { label:'Common Shares', data:[500000], backgroundColor:'rgba(88,166,255,0.7)', borderRadius:4 },
+      { label:'Retained Earnings', data:[1126490], backgroundColor:'rgba(88,166,255,0.4)', borderRadius:4 },
+    ]
+  },
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } },
+    scales:{ x:{stacked:true,...gridOpts('x'),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}}, y:{stacked:true,...noGrid()} } }
+});
+
+// FLEET: Occupancy line
+new Chart(document.getElementById('c-fleet-occ'), {
+  type:'line',
+  data:{
+    labels:MONTHS,
+    datasets:[
+      { label:'2023 Occupancy', data:occ2023, borderColor:C.gold, backgroundColor:'rgba(240,165,0,0.08)', fill:true, borderWidth:2.5, pointRadius:4, pointBackgroundColor:C.gold, tension:0.4 },
+      { label:'2024 Occupancy', data:occ2024, borderColor:C.blue, backgroundColor:'rgba(88,166,255,0.08)', fill:true, borderWidth:2.5, pointRadius:4, pointBackgroundColor:C.blue, tension:0.4 },
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+(c.raw).toFixed(1)+'%' } } },
+    scales:{ x:noGrid(), y:{...gridOpts(),min:0,max:70,ticks:{callback:v=>v+'%',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// FLEET: RevPAD by type
+const rvTypes = ['Luxury Coach','Class A\nMotorhome','Class C\nMotorhome','Fifth Wheel','Class B\nCampervan','Travel\nTrailer'];
+const revpadData = [355.5,254.3,168.1,133.8,130.6,91.9];
+const adrData = [712.5,493.7,348.1,268.8,239.4,195.8];
+new Chart(document.getElementById('c-revpad'), {
+  type:'bar',
+  data:{
+    labels:rvTypes,
+    datasets:[
+      { label:'RevPAD ($/day)', data:revpadData, backgroundColor:PALETTE.map(c=>c+'cc'), borderRadius:5 },
+      { label:'Avg Daily Rate ($/day)', data:adrData, type:'line', borderColor:C.gold, backgroundColor:'transparent', borderWidth:2, pointRadius:4, pointBackgroundColor:C.gold, tension:0.3 }
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+v,color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// FLEET table
+const fleetTableData = [
+  ['Luxury Coach',713,356,39.6,372478,'💎 Premium'],
+  ['Class A Motorhome',494,254,42.9,502957,'⭐ High'],
+  ['Class C Motorhome',348,168,39.8,442523,'⭐ High'],
+  ['Fifth Wheel',269,134,39.1,300651,'📍 Mid'],
+  ['Class B Campervan',239,131,43.4,278092,'📍 Mid'],
+  ['Travel Trailer',196,92,38.7,280592,'🌱 Entry'],
+];
+const totalRevFleet = fleetTableData.reduce((a,r)=>a+r[4],0);
+const ftbody = document.getElementById('fleet-table-body');
+fleetTableData.forEach(r=>{
+  const tr=document.createElement('tr');
+  const share = (r[4]/totalRevFleet*100).toFixed(1);
+  const occColor = r[2]>42 ? C.green : r[2]>38 ? C.gold : C.muted;
+  tr.innerHTML=`<td style="font-weight:500">${r[0]}</td><td class="num">$${r[1]}</td><td class="num" style="color:${C.teal}">$${r[2]}</td><td>
+    <div class="occ-bar"><div class="occ-track"><div class="occ-fill" style="width:${r[3]/60*100}%"></div></div>
+    <span style="color:${occColor};font-family:'JetBrains Mono',monospace;font-size:11px;min-width:40px">${r[3]}%</span></div>
+  </td><td class="num">${fmtCAD(r[4])}</td><td>${r[5]}</td>`;
+  ftbody.appendChild(tr);
+});
+
+// FLEET: RV type rev
+new Chart(document.getElementById('c-rv-type-rev'), {
+  type:'doughnut',
+  data:{
+    labels:['Class A Motorhome','Class C Motorhome','Luxury Coach','Fifth Wheel','Travel Trailer','Class B Campervan'],
+    datasets:[{ data:[502957,442523,372478,300651,280592,278092], backgroundColor:PALETTE, borderWidth:0, hoverOffset:6 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'58%', plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } } }
+});
+
+// FLEET: Top 10 RVs
+new Chart(document.getElementById('c-top-rv'), {
+  type:'bar',
+  data:{
+    labels:['RV-021','RV-007','RV-006','RV-011','RV-001','RV-019','RV-008','RV-002','RV-012','RV-015'],
+    datasets:[{
+      label:'Revenue',
+      data:[221483,150995,144456,121455,119206,117840,104249,98118,91258,87245],
+      backgroundColor:[C.gold,C.gold,...Array(8).fill('rgba(88,166,255,0.6)')],
+      borderRadius:4
+    }]
+  },
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } },
+    scales:{ x:{...gridOpts('x'),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}}, y:noGrid() } }
+});
+
+// REVENUE: Channel
+new Chart(document.getElementById('c-channel'), {
+  type:'doughnut',
+  data:{
+    labels:['Direct Website','OTA - RVshare','OTA - Outdoorsy','Corporate','Referral'],
+    datasets:[{ data:[899123,469645,449628,193828,165069], backgroundColor:[C.gold,C.blue,C.green,C.purple,C.teal], borderWidth:0, hoverOffset:5 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw)+' ('+(c.raw/2177293*100).toFixed(1)+'%)' } } } }
+});
+
+// REVENUE: Province comp
+new Chart(document.getElementById('c-prov-comp'), {
+  type:'bar',
+  data:{
+    labels:['ON','BC','AB','MB','QC'],
+    datasets:[
+      { label:'2023', data:[375979,289873,270030,83501,73273], backgroundColor:'rgba(240,165,0,0.75)', borderRadius:4 },
+      { label:'2024', data:[335987,320348,239557,70394,118351], backgroundColor:'rgba(88,166,255,0.75)', borderRadius:4 }
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:legend(), tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// REVENUE: Season donut
+new Chart(document.getElementById('c-season-donut'), {
+  type:'doughnut',
+  data:{
+    labels:['Peak','High','Shoulder','Low'],
+    datasets:[{ data:[1056434,473770,386441,260648], backgroundColor:[C.gold,C.green,C.blue,C.muted], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'62%', plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } } }
+});
+
+// REVENUE: ADR by type
+new Chart(document.getElementById('c-adr-type'), {
+  type:'bar',
+  data:{
+    labels:['Luxury\nCoach','Class A','Class C','Fifth\nWheel','Class B','Travel\nTrailer'],
+    datasets:[{ label:'Avg Daily Rate (CAD)', data:[713,494,348,269,239,196], backgroundColor:PALETTE, borderRadius:5 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+v,color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// REVENUE: Concentration
+new Chart(document.getElementById('c-rev-conc'), {
+  type:'doughnut',
+  data:{
+    labels:['Top 5 RVs','Remaining 20 RVs'],
+    datasets:[{ data:[714437,1462856], backgroundColor:[C.gold,C.border], borderWidth:0 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{ legend:legend('bottom'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw)+' ('+(c.raw/2177293*100).toFixed(1)+'%)' } } } }
+});
+
+// Province table
+const provData = [
+  ['Ontario (ON)',375979,335987],
+  ['British Columbia (BC)',289873,320348],
+  ['Alberta (AB)',270030,239557],
+  ['Manitoba (MB)',83501,70394],
+  ['Québec (QC)',73273,118351],
+];
+const ptbody = document.getElementById('prov-table-body');
+const total2024 = provData.reduce((a,r)=>a+r[2],0);
+provData.forEach(r=>{
+  const chg = (r[2]-r[1])/r[1];
+  const tr=document.createElement('tr');
+  const chgColor = chg>=0 ? C.green : C.red;
+  const chgArrow = chg>=0 ? '▲' : '▼';
+  const shareW = (r[2]/total2024*100);
+  tr.innerHTML=`<td style="font-weight:500">${r[0]}</td><td class="num">${fmtCAD(r[1])}</td><td class="num">${fmtCAD(r[2])}</td>
+    <td class="num" style="color:${chgColor}">${chgArrow} ${Math.abs(chg*100).toFixed(1)}%</td>
+    <td><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:8px;background:var(--border);border-radius:4px"><div style="width:${shareW}%;height:8px;border-radius:4px;background:${C.gold}"></div></div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;min-width:36px">${shareW.toFixed(1)}%</span></div></td>`;
+  ptbody.appendChild(tr);
+});
+
+// CUSTOMERS: Segment donut
+new Chart(document.getElementById('c-seg-donut'), {
+  type:'doughnut',
+  data:{
+    labels:['Adventure Seeker','Corporate','Leisure Family','Solo Traveler','Retiree'],
+    datasets:[{ data:[43,42,40,39,36], backgroundColor:PALETTE, borderWidth:0, hoverOffset:5 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'58%', plugins:{ legend:legend('right'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+c.raw+' customers ('+(c.raw/200*100).toFixed(1)+'%)' } } } }
+});
+
+// CUSTOMERS: Acquisition channel bar
+new Chart(document.getElementById('c-acq-bar'), {
+  type:'bar',
+  data:{
+    labels:['Social Media','OTA','Paid Search','Direct','Referral','Organic Search'],
+    datasets:[{ label:'Customers', data:[39,36,34,31,31,29], backgroundColor:[C.gold,C.blue,C.green,C.teal,C.purple,C.red], borderRadius:5 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:tooltip() },
+    scales:{ x:noGrid(), y:{...gridOpts(),border:{display:false}} } }
+});
+
+// CUSTOMERS: Channel revenue
+new Chart(document.getElementById('c-chan-rev'), {
+  type:'bar',
+  data:{
+    labels:['Direct\nWebsite','OTA -\nRVshare','OTA -\nOutdoorsy','Corporate','Referral'],
+    datasets:[{ label:'Total Revenue', data:[899123,469645,449628,193828,165069], backgroundColor:[C.gold,...Array(4).fill('rgba(88,166,255,0.65)')], borderRadius:5 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+fmtCAD(c.raw) } } },
+    scales:{ x:noGrid(), y:{...gridOpts(),ticks:{callback:v=>'$'+Math.round(v/1000)+'K',color:C.muted,font:{size:10}},border:{display:false}} } }
+});
+
+// CUSTOMERS: Province distribution
+new Chart(document.getElementById('c-cust-prov'), {
+  type:'doughnut',
+  data:{
+    labels:['Ontario','British Columbia','Alberta','Manitoba','Québec'],
+    datasets:[{ data:[40,38,37,28,29+28], backgroundColor:[C.gold,C.blue,C.green,C.purple,C.teal], borderWidth:0 }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{ legend:legend('right'), tooltip:{ ...tooltip(), callbacks:{ label:c=>' '+c.raw+' customers' } } } }
+});
+</script>
+</body>
+</html>

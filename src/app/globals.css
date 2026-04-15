@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0f1422;
+  --color-bg-alt: #1a1f2e;
+  --color-gold: #d4a853;
+  --color-gold-dark: #c4944a;
+  --color-cream: #f5f1e8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-cream);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-bg);
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-10;
+  }
+  .heading-serif {
+    @apply font-serif tracking-tight text-cream-100;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-gold-500 px-6 py-3 font-medium text-ink-900 transition-all duration-300 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 bg-transparent px-6 py-3 font-medium text-gold-400 transition-all duration-300 hover:border-gold-500 hover:bg-gold-500/10;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-gold-400 transition-colors hover:text-gold-300;
+  }
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.2em] text-gold-500;
+  }
+  .divider-gold {
+    @apply h-px w-16 bg-gradient-to-r from-gold-500 to-transparent;
+  }
+  .card {
+    @apply rounded-sm border border-white/5 bg-ink-700/60 p-8 transition-all duration-300 hover:border-gold-500/30 hover:bg-ink-700;
+  }
+  .link-gold {
+    @apply text-gold-400 underline-offset-4 transition-colors hover:text-gold-300 hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(212,168,83,0.08) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse at top left, rgba(212,168,83,0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(212,168,83,0.05), transparent 50%),
+      linear-gradient(180deg, #0f1422 0%, #0a0e1a 100%);
+  }
+}
