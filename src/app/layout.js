@@ -39,12 +39,21 @@ export const metadata = {
     url: site.url,
     siteName: "FPnA People Inc.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FPnA People — Strategic Finance Advisory & Automation",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FPnA People Inc.",
     description:
       "Fractional CFO, Power BI automation, and FP&A consulting for PE portfolios and growth companies.",
+    images: ["/og-image.png"],
   },
 };
 

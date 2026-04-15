@@ -24,6 +24,20 @@ export async function generateMetadata({ params }) {
       type: "article",
       publishedTime: post.date,
       authors: ["Fahad Younus, CPA, FCA"],
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "FPnA People — Strategic Finance Advisory & Automation",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.metaDescription,
+      images: ["/og-image.png"],
     },
   };
 }
