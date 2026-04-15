@@ -25,6 +25,13 @@ export const metadata = {
     "AI for finance",
   ],
   authors: [{ name: "Fahad Younus, CPA, FCA" }],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Strategic Finance Advisory & Automation | FPnA People",
     description:
