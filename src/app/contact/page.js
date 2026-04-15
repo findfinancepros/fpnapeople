@@ -2,9 +2,9 @@ import { Section } from "@/components/Section";
 import { site } from "@/data/site";
 
 export const metadata = {
-  title: "Contact — Let's Talk Finance",
+  title: "Contact | Fractional CFO & Finance Advisory | FPnA People",
   description:
-    "Book a finance strategy intro call, or reach out directly. Toronto-based, serving Canada and the United States.",
+    "Book a 30-minute finance strategy intro call with Fahad Younus, CPA, FCA. Toronto-based fractional CFO and finance advisory serving Canada and the US.",
   alternates: { canonical: "/contact" },
 };
 
@@ -53,14 +53,6 @@ export default function ContactPage() {
               <p className="eyebrow mb-4">Direct</p>
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-cream-200/50">Email</dt>
-                  <dd className="mt-1">
-                    <a href={`mailto:${site.email}`} className="link-gold">
-                      {site.email}
-                    </a>
-                  </dd>
-                </div>
-                <div>
                   <dt className="text-xs uppercase tracking-wider text-cream-200/50">Phone</dt>
                   <dd className="mt-1">
                     <a href={`tel:${site.phone}`} className="link-gold">
@@ -72,7 +64,7 @@ export default function ContactPage() {
                   <dt className="text-xs uppercase tracking-wider text-cream-200/50">LinkedIn</dt>
                   <dd className="mt-1 space-y-1">
                     <a href={site.linkedin.fahad} target="_blank" rel="noreferrer" className="link-gold block text-sm">
-                      Fahad Younus →
+                      Connect with Fahad →
                     </a>
                     <a href={site.linkedin.company} target="_blank" rel="noreferrer" className="link-gold block text-sm">
                       FPnA People Inc. →

@@ -4,9 +4,9 @@ import CtaBand from "@/components/CtaBand";
 import { industries } from "@/data/site";
 
 export const metadata = {
-  title: "Industries We Serve",
+  title: "Industries — Fractional CFO & Finance Advisory",
   description:
-    "Manufacturing, SaaS, real estate, healthcare, e-commerce, fashion, and private equity — operational finance depth across the industries that move the needle.",
+    "Fractional CFO and finance advisory across manufacturing, SaaS, real estate, healthcare, e-commerce, fashion, and private equity portfolio companies.",
   alternates: { canonical: "/industries" },
 };
 

@@ -4,9 +4,9 @@ import CtaBand from "@/components/CtaBand";
 import { services } from "@/data/site";
 
 export const metadata = {
-  title: "Services — Strategic Finance, Power BI, AI",
+  title: "Fractional CFO, Power BI Automation & FP&A Services",
   description:
-    "Strategic finance advisory, FP&A, Power BI automation, controllership, ERP advisory, exit readiness, acquisition integration, and AI for finance.",
+    "Fractional CFO, controller, bookkeeping, FP&A consulting, Power BI automation, ERP advisory, exit readiness, and AI for finance — PE-backed and growth companies.",
   alternates: { canonical: "/services" },
 };
 

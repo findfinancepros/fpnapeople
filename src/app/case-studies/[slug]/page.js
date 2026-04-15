@@ -41,6 +41,11 @@ export default function CaseStudyPage({ params }) {
           <h1 className="heading-serif mt-6 max-w-4xl text-balance text-5xl leading-tight md:text-6xl lg:text-7xl">
             {detail.title}
           </h1>
+          {detail.note && (
+            <p className="mt-6 max-w-3xl rounded-sm border border-gold-500/20 bg-ink-700/40 p-4 text-sm italic text-cream-200/70">
+              {detail.note}
+            </p>
+          )}
         </div>
       </section>
 

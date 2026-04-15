@@ -3,8 +3,9 @@ import { Section } from "@/components/Section";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata = {
-  title: "Insights & Writing",
-  description: "Insights on strategic finance, Power BI automation, and AI for finance.",
+  title: "Insights & Writing | FPnA People",
+  description:
+    "Insights on fractional CFO strategy, Power BI automation, FP&A consulting, and AI for finance — from Fahad Younus, CPA, FCA.",
   alternates: { canonical: "/blog" },
 };
 

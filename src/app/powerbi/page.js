@@ -3,9 +3,9 @@ import CtaBand from "@/components/CtaBand";
 import { powerBiReports } from "@/data/site";
 
 export const metadata = {
-  title: "Power BI Showcase — Live Interactive Dashboards",
+  title: "Power BI Dashboards for Finance | Interactive Samples | FPnA People",
   description:
-    "Live Power BI dashboards built by FPnA People. Explore retail, Shopify, financial statements, and inventory analytics — interactive and real.",
+    "Live, interactive Power BI dashboard samples for finance — retail, Shopify, financial statements, and inventory analytics. Explore real work from FPnA People.",
   alternates: { canonical: "/powerbi" },
 };
 

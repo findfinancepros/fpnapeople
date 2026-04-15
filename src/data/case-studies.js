@@ -30,6 +30,8 @@ export const caseStudyDetails = {
   "northroam-rv-dashboard": {
     title: "NorthRoam RV Rentals — Financial Dashboard",
     industry: "Travel & Leisure",
+    anonymized: true,
+    note: "NorthRoam is an anonymized name. Client details have been changed to protect confidentiality.",
     challenge:
       "An RV rental operator was flying blind between month-ends — revenue, fleet utilization, and expense performance all lived in disconnected spreadsheets that didn't refresh until the accountant got around to it.",
     approach: [
@@ -52,11 +54,11 @@ export const caseStudyDetails = {
   },
 
   "manufacturing-transformation": {
-    title: "Multi-Site Manufacturer — Finance Transformation",
+    title: "Automotive Parts Manufacturer — Finance Transformation",
     industry: "Manufacturing",
     anonymized: true,
     challenge:
-      "A $50M+ multi-site machine parts manufacturer needed to modernize its finance function to meet PE sponsor reporting requirements. Reporting was manual and took days. The business ran 40,000+ SKUs, carried $200M+ in loan commitments with covenant requirements, and was planning a $38M capex facility expansion.",
+      "A $100M+ multi-site automotive parts manufacturer needed to modernize its finance function to meet PE sponsor reporting requirements. Reporting was manual and took days. The business ran 40,000+ SKUs, carried $200M+ in loan commitments with covenant requirements, and was planning a $38M capex facility expansion.",
     approach: [
       "Implemented Power BI dashboards connected directly to Dynamics BC365",
       "Compressed the month-end close from multi-day to single-day",
@@ -75,26 +77,27 @@ export const caseStudyDetails = {
       "The finance function moved from a back-office reconciliation shop to a forward-looking partner for the PE sponsor. Covenant reporting became routine, capex decisions were data-backed, and the close cycle stopped being the bottleneck on business decisions.",
   },
 
-  "senior-living-consolidation": {
-    title: "PE-Backed Senior Living Portfolio — Financial Consolidation",
-    industry: "Real Estate",
+  "compounding-pharmacy-automation": {
+    title: "Compounding Pharmacy — Power BI Automation for Financial Reporting",
+    industry: "Healthcare",
     anonymized: true,
     challenge:
-      "A PE-backed senior living and real estate portfolio needed consolidated financial reporting across multiple operating entities — with investor-ready distribution waterfalls and real-time portfolio visibility the sponsor could rely on.",
+      "A compounding pharmacy needed Power BI automation for monthly financials, a real budget-to-actual variance analysis framework, and polished external reports for major pharmacy chain partners to strengthen credibility. Monthly reporting was manual, there was no variance analysis framework in place, and the business needed credibility-building reports to deepen its partnerships with major pharmacy chains.",
     approach: [
-      "Integrated Yardi across the portfolio for consistent data capture",
-      "Built multi-entity Power BI consolidations with drill-through to property level",
-      "Designed investor reporting packages aligned to sponsor standards",
-      "Modeled distribution waterfalls with preferred return, catch-up, and promote tiers",
+      "Built Power BI dashboards automating monthly financial reporting",
+      "Designed a budget vs actual variance analysis framework with drill-through to account and cost-center level",
+      "Created professional, branded external reports for major pharmacy chain partners",
+      "Automated the data pipeline so reporting refreshes without manual intervention",
+      "Standardized KPI definitions across internal finance and external partner reporting",
     ],
     highlights: [
-      "Automated multi-entity consolidation",
-      "Real-time portfolio visibility for the PE sponsor",
-      "Investor-ready distribution waterfalls",
-      "Yardi integration across the portfolio",
+      "Fully automated monthly financial reporting",
+      "Real-time budget-to-actual variance visibility",
+      "Branded external reporting for major pharmacy chain partners",
+      "Credibility-building package that supported expanded partnerships",
     ],
     outcome:
-      "Portfolio reporting stopped being a month-end sprint. The sponsor moved from retrospective investor communications to proactive, real-time portfolio management.",
+      "Monthly reporting went from manual workbook assembly to automated Power BI delivery. Leadership gained real-time variance visibility, and the external reporting package enhanced credibility with major pharmacy chains — directly supporting expanded partnership relationships.",
   },
 };
 

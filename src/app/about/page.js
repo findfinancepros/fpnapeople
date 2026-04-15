@@ -4,9 +4,9 @@ import CtaBand from "@/components/CtaBand";
 import { site } from "@/data/site";
 
 export const metadata = {
-  title: "About — Fahad Younus, CPA, FCA",
+  title: "Fahad Younus CPA FCA | Fractional CFO Toronto | FPnA People",
   description:
-    "FPnA People Inc. is a Toronto-based finance advisory and automation firm. Founded by Fahad Younus, CPA, FCA — 15+ years, ex-KPMG.",
+    "Fahad Younus, CPA, FCA — Toronto-based fractional CFO and founder of FPnA People Inc. 15+ years, ex-KPMG. Strategic finance, Power BI, and AI for growth companies.",
   alternates: { canonical: "/about" },
 };
 

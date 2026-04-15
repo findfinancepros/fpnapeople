@@ -5,9 +5,9 @@ import Counter from "@/components/Counter";
 import { services, industries, testimonials, stats, site } from "@/data/site";
 
 export const metadata = {
-  title: "Strategic Finance Advisory & Power BI Automation",
+  title: "Strategic Finance Advisory & Automation | FPnA People | Toronto",
   description:
-    "We work alongside your finance team — advising, automating, and accelerating. Strategic finance advisory and Power BI automation for PE-backed and high-growth businesses.",
+    "Toronto-based strategic finance advisory, automation, and AI for PE portfolio companies and high-growth businesses — advising, automating, and accelerating.",
   alternates: { canonical: "/" },
 };
 
@@ -51,9 +51,9 @@ export default function HomePage() {
         <div className="absolute -top-40 right-0 h-[500px] w-[500px] rounded-full bg-gold-500/5 blur-[140px]" />
         <div className="absolute -bottom-40 left-0 h-[500px] w-[500px] rounded-full bg-gold-500/5 blur-[140px]" />
         <div className="container-x relative py-32 md:py-44">
-          <p className="eyebrow mb-6 animate-fade-in">Strategic Finance · Power BI · AI</p>
+          <p className="eyebrow mb-6 animate-fade-in">Strategic Finance · Automation · AI</p>
           <h1 className="heading-serif max-w-5xl text-balance text-5xl leading-[1.05] md:text-6xl lg:text-7xl">
-            Strategic Finance Advisory & Power BI Automation for{" "}
+            Strategic Finance Advisory, Automation & AI for{" "}
             <span className="text-gold-500">PE Portfolio Companies</span> and High-Growth Businesses
           </h1>
           <p className="mt-8 max-w-2xl text-xl leading-relaxed text-cream-200/75 md:text-2xl">

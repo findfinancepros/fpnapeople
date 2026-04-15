@@ -24,6 +24,27 @@ export const navLinks = [
 
 export const services = [
   {
+    slug: "fractional-cfo-controller",
+    title: "Fractional CFO, Controller & Bookkeeping Support",
+    tagline: "Senior finance leadership and operational accounting — without the full-time hire.",
+    description:
+      "Dedicated fractional CFO, fractional controller, and bookkeeping support for businesses that need senior finance leadership and operational accounting without the full-time commitment. From strategic CFO advisory to month-end close and daily bookkeeping operations.",
+    forWhom: [
+      "Growing businesses with $3M–$200M+ revenue",
+      "PE portfolio companies between permanent hires",
+      "Companies preparing for audit, exit, or fundraise",
+    ],
+    deliverables: [
+      "Fractional CFO — strategy, board reporting, capital planning, KPI frameworks",
+      "Fractional controller — month-end close, reconciliations, audit prep, GAAP alignment",
+      "Bookkeeping support — AP, AR, payroll, and daily accounting operations",
+      "Cash flow forecasting and working capital management",
+      "Investor and lender reporting packages",
+      "Finance team coaching and transition support for permanent hires",
+    ],
+    industries: ["manufacturing", "saas-subscription", "real-estate", "healthcare", "ecommerce-cpg", "private-equity"],
+  },
+  {
     slug: "strategic-finance-advisory",
     title: "Strategic Finance Advisory",
     tagline: "Board-ready strategy for PE-backed and high-growth companies.",
@@ -199,7 +220,7 @@ export const industries = [
     title: "Manufacturing",
     tagline: "Cost, covenant, and capex intelligence for multi-site manufacturers.",
     description:
-      "We've supported manufacturers with 40,000+ SKUs, $500M+ loan portfolios, and $38M+ capex programs — bringing costing discipline and real-time operational visibility to PE-backed and founder-led businesses.",
+      "We've supported automotive parts manufacturers and other industrial operators with 40,000+ SKUs, $500M+ loan portfolios, and $38M+ capex programs — bringing costing discipline and real-time operational visibility to PE-backed and founder-led businesses.",
     expertise: [
       "Product costing across materials, labor, and overheads",
       "Standard vs actual variance analysis at SKU level",
@@ -339,18 +360,18 @@ export const caseStudies = [
   },
   {
     slug: "manufacturing-transformation",
-    title: "Multi-Site Manufacturer — Finance Transformation",
+    title: "Automotive Parts Manufacturer — Finance Transformation",
     summary:
-      "A $50M+ machine parts manufacturer modernized for PE reporting — month-end close compressed from multi-day to single day, and $38M capex approved.",
+      "A $100M+ automotive parts manufacturer modernized for PE reporting — month-end close compressed from multi-day to single day, and $38M capex approved.",
     industry: "Manufacturing",
     anonymized: true,
   },
   {
-    slug: "senior-living-consolidation",
-    title: "PE-Backed Senior Living Portfolio — Financial Consolidation",
+    slug: "compounding-pharmacy-automation",
+    title: "Compounding Pharmacy — Power BI Automation for Financial Reporting",
     summary:
-      "Yardi integration, multi-entity consolidation, and investor-ready distribution waterfalls for a PE-backed senior living and real estate portfolio.",
-    industry: "Real Estate",
+      "Power BI automation for monthly financials, budget-to-actual variance analysis, and polished external reporting that enhanced credibility with major pharmacy chain partners.",
+    industry: "Healthcare",
     anonymized: true,
   },
 ];
@@ -394,7 +415,7 @@ export const testimonials = [
     quote:
       "Ability to make quick, informed, and impactful decisions is priceless in today's dynamic environment, and FPnA People enables us to do exactly that.",
     name: "Irfan Sattar",
-    role: "CEO, Greeniche Group of Companies",
+    role: "CEO, Helios Laboratories",
     linkedin: "https://www.linkedin.com/in/irfansattar/",
   },
 ];

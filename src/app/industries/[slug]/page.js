@@ -12,8 +12,8 @@ export async function generateMetadata({ params }) {
   const i = getIndustry(params.slug);
   if (!i) return {};
   return {
-    title: `${i.title} Finance Advisory`,
-    description: i.tagline,
+    title: `${i.title} Fractional CFO & Finance Advisory`,
+    description: `${i.title} fractional CFO, Power BI automation, and finance advisory. ${i.tagline}`.slice(0, 158),
     alternates: { canonical: `/industries/${i.slug}` },
   };
 }

@@ -4,9 +4,9 @@ import CtaBand from "@/components/CtaBand";
 import { caseStudies } from "@/data/site";
 
 export const metadata = {
-  title: "Case Studies",
+  title: "Case Studies | Fractional CFO & Power BI Automation",
   description:
-    "Selected client work from FPnA People — fintech models, Power BI dashboards, finance transformation, and consolidated investor reporting.",
+    "Selected client work — fintech models, Power BI dashboards, finance transformation, and compounding pharmacy automation. Real outcomes from FPnA People.",
   alternates: { canonical: "/case-studies" },
 };
 

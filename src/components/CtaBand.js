@@ -18,8 +18,13 @@ export default function CtaBand({
             <a href={site.calendly} target="_blank" rel="noreferrer" className="btn-primary">
               {primaryLabel} →
             </a>
-            <a href={`mailto:${site.email}`} className="btn-secondary">
-              Email Fahad
+            <a
+              href={site.linkedin.fahad}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-secondary"
+            >
+              Connect with Fahad
             </a>
           </div>
         </div>

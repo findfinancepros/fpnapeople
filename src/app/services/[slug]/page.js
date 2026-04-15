@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   if (!s) return {};
   return {
     title: s.title,
-    description: s.tagline,
+    description: `${s.tagline} ${s.description}`.replace(/\s+/g, " ").slice(0, 158),
     alternates: { canonical: `/services/${s.slug}` },
   };
 }

@@ -32,9 +32,6 @@ export default function Footer() {
               <a href={site.linkedin.company} target="_blank" rel="noreferrer" className="link-gold">
                 LinkedIn
               </a>
-              <a href={site.directory} target="_blank" rel="noreferrer" className="link-gold">
-                Our Directory — FindFinancePros.com
-              </a>
             </div>
           </div>
 
@@ -94,7 +91,6 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 text-xs text-cream-200/50 md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} FPnA People Inc. All rights reserved.</p>
-          <p>CPA, FCA · Ex-KPMG · 15+ Years</p>
         </div>
       </div>
     </footer>
