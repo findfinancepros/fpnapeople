@@ -5,7 +5,7 @@ import { powerBiReports } from "@/data/site";
 export const metadata = {
   title: "Power BI Dashboards for Finance | Interactive Samples | FPnA People",
   description:
-    "Live, interactive Power BI dashboard samples for finance — retail, Shopify, financial statements, and inventory analytics. Explore real work from FPnA People.",
+    "Live, interactive Power BI dashboard samples for finance, covering retail, Shopify, financial statements, and inventory analytics. Explore real work from FPnA People.",
   alternates: { canonical: "/powerbi" },
 };
 
@@ -16,7 +16,7 @@ export default function PowerBIShowcase() {
         <div className="container-x py-24 md:py-32">
           <p className="eyebrow mb-4">Power BI Showcase</p>
           <h1 className="heading-serif max-w-4xl text-5xl leading-tight md:text-6xl lg:text-7xl">
-            Interactive Power BI Dashboards — See Our Work in Action
+            Interactive Power BI Dashboards: See Our Work in Action
           </h1>
           <p className="mt-6 max-w-3xl text-lg text-cream-200/80">
             Unlike most advisory firms, we let you experience our work firsthand. Explore these

@@ -7,7 +7,7 @@ import { services, industries, testimonials, stats, site } from "@/data/site";
 export const metadata = {
   title: "Strategic Finance Advisory & Automation | FPnA People | Toronto",
   description:
-    "Toronto-based strategic finance advisory, automation, and AI for PE portfolio companies and high-growth businesses — advising, automating, and accelerating.",
+    "Toronto-based strategic finance advisory, automation, and AI for PE portfolio companies and high-growth businesses. We advise, automate, and accelerate.",
   alternates: { canonical: "/" },
 };
 
@@ -57,7 +57,7 @@ export default function HomePage() {
             <span className="text-gold-500">PE Portfolio Companies</span> and High-Growth Businesses
           </h1>
           <p className="mt-8 max-w-2xl text-xl leading-relaxed text-cream-200/75 md:text-2xl">
-            We work alongside your finance team — advising, automating, and accelerating.
+            We work alongside your finance team, advising, automating, and accelerating.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <a href={site.calendly} target="_blank" rel="noreferrer" className="btn-primary">
@@ -103,7 +103,7 @@ export default function HomePage() {
       <Section>
         <SectionHeader
           eyebrow="How We Work"
-          title="We don't replace your finance team — we amplify them."
+          title="We don't replace your finance team. We amplify them."
           description="Engagements scale up and down. We come in with senior finance firepower, put the systems and frameworks in place, and transfer capability to your team so the improvement sticks long after we're gone."
         />
         <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -112,19 +112,19 @@ export default function HomePage() {
               step: "01",
               title: "Assess",
               body:
-                "We map the current finance function — reporting, systems, close cycle, and what leadership actually needs to decide. Output: a prioritized plan with fast wins and longer-arc projects.",
+                "We map the current finance function: reporting, systems, close cycle, and what leadership actually needs to decide. Output: a prioritized plan with fast wins and longer-arc projects.",
             },
             {
               step: "02",
               title: "Implement",
               body:
-                "We build — dashboards, models, close acceleration, ERP advisory, AI workflows — working alongside your team as an extension of the function, not a black-box consultant.",
+                "We build dashboards, models, close acceleration, ERP advisory, and AI workflows, working alongside your team as an extension of the function, not a black-box consultant.",
             },
             {
               step: "03",
               title: "Transfer",
               body:
-                "Knowledge, documentation, and ownership move to your team. We scale our involvement up or down based on what the business actually needs — not a retainer floor.",
+                "Knowledge, documentation, and ownership move to your team. We scale our involvement up or down based on what the business actually needs, not a retainer floor.",
             },
           ].map((s) => (
             <div key={s.step} className="card">
@@ -142,7 +142,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Services"
             title="Senior finance capability, delivered where you need it."
-            description="From board-level strategy to Power BI builds to AI workflows — a connected set of services, not a menu of silos."
+            description="From board-level strategy to Power BI builds to AI workflows, a connected set of services rather than a menu of silos."
           />
           <Link href="/services" className="btn-ghost shrink-0">
             All services →

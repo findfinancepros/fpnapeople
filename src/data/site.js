@@ -26,7 +26,7 @@ export const services = [
   {
     slug: "fractional-cfo-controller",
     title: "Fractional CFO, Controller & Bookkeeping Support",
-    tagline: "Senior finance leadership and operational accounting — without the full-time hire.",
+    tagline: "Senior finance leadership and operational accounting, without the full-time hire.",
     description:
       "Dedicated fractional CFO, fractional controller, and bookkeeping support for businesses that need senior finance leadership and operational accounting without the full-time commitment. From strategic CFO advisory to month-end close and daily bookkeeping operations.",
     forWhom: [
@@ -35,9 +35,9 @@ export const services = [
       "Companies preparing for audit, exit, or fundraise",
     ],
     deliverables: [
-      "Fractional CFO — strategy, board reporting, capital planning, KPI frameworks",
-      "Fractional controller — month-end close, reconciliations, audit prep, GAAP alignment",
-      "Bookkeeping support — AP, AR, payroll, and daily accounting operations",
+      "Fractional CFO covering strategy, board reporting, capital planning, and KPI frameworks",
+      "Fractional controller covering month-end close, reconciliations, audit prep, and GAAP alignment",
+      "Bookkeeping support covering AP, AR, payroll, and daily accounting operations",
       "Cash flow forecasting and working capital management",
       "Investor and lender reporting packages",
       "Finance team coaching and transition support for permanent hires",
@@ -49,7 +49,7 @@ export const services = [
     title: "Strategic Finance Advisory",
     tagline: "Board-ready strategy for PE-backed and high-growth companies.",
     description:
-      "Financial strategy aligned to PE hold-period objectives, capital raising support, M&A readiness, exit preparation, and board and investor reporting frameworks — delivered alongside your internal team.",
+      "Financial strategy aligned to PE hold-period objectives, capital raising support, M&A readiness, exit preparation, and board and investor reporting frameworks, all delivered alongside your internal team.",
     forWhom: [
       "PE-backed portfolio company CFOs and CEOs",
       "Founder-led businesses preparing for growth capital or exit",
@@ -70,7 +70,7 @@ export const services = [
     title: "FP&A & Performance Management",
     tagline: "Forecasts, KPIs, and profitability intelligence that drive decisions.",
     description:
-      "Budgeting, forecasting, 3-statement models, KPI tracking, and profitability analysis across product, customer, and channel — built on durable frameworks that scale with you.",
+      "Budgeting, forecasting, 3-statement models, KPI tracking, and profitability analysis across product, customer, and channel, built on durable frameworks that scale with you.",
     forWhom: [
       "Finance leaders building out their FP&A function",
       "Growth-stage SaaS companies tracking ARR, CAC, and LTV",
@@ -91,7 +91,7 @@ export const services = [
     title: "Power BI Automation & Real-Time Reporting",
     tagline: "From month-end spreadsheets to real-time, self-service dashboards.",
     description:
-      "Custom Power BI dashboards for CEOs, boards, and investors — with automated ETL pipelines from your ERP, so your team spends time deciding instead of reconciling.",
+      "Custom Power BI dashboards for CEOs, boards, and investors, with automated ETL pipelines from your ERP, so your team spends time deciding instead of reconciling.",
     forWhom: [
       "Finance teams drowning in manual reporting",
       "Executives who need real-time operational visibility",
@@ -100,7 +100,7 @@ export const services = [
     deliverables: [
       "Custom dashboards for CEO, board, and investor audiences",
       "Automated ETL from Dynamics BC365, NetSuite, SAP, Yardi, QBO",
-      "Month-end close acceleration — multi-day to single day",
+      "Month-end close acceleration, from multi-day to single day",
       "Covenant and lender reporting automation",
       "Training and knowledge transfer for in-house independence",
       "Dashboard governance and version control frameworks",
@@ -112,7 +112,7 @@ export const services = [
     title: "Accounting & Controllership Support",
     tagline: "Clean books, fast closes, audit-ready results.",
     description:
-      "Controllership-grade accounting support — month-end close, reconciliations, audit preparation, and GAAP alignment — so your leadership can trust the numbers.",
+      "Controllership-grade accounting support, covering month-end close, reconciliations, audit preparation, and GAAP alignment, so your leadership can trust the numbers.",
     forWhom: [
       "Companies between controllers or scaling their finance team",
       "Businesses preparing for audit or due diligence",
@@ -131,9 +131,9 @@ export const services = [
   {
     slug: "erp-systems-advisory",
     title: "ERP & Systems Advisory",
-    tagline: "Implementations that deliver — without the 18-month detour.",
+    tagline: "Implementations that deliver, without the 18-month detour.",
     description:
-      "Vendor-agnostic ERP advisory across Dynamics BC365, Yardi, NetSuite, SAP, and QBO — plus procurement-to-pay and AP automation to make the stack actually work.",
+      "Vendor-agnostic ERP advisory across Dynamics BC365, Yardi, NetSuite, SAP, and QBO, plus procurement-to-pay and AP automation to make the stack actually work.",
     forWhom: [
       "Companies selecting or implementing a new ERP",
       "Post-acquisition groups consolidating onto one platform",
@@ -154,7 +154,7 @@ export const services = [
     title: "Exit Readiness & Due Diligence",
     tagline: "Positioning portfolio companies for the best possible exit.",
     description:
-      "Sell-side preparation for PE-backed companies — data room, financial model, covenant packages, and the story that strategic and financial buyers expect.",
+      "Sell-side preparation for PE-backed companies, covering the data room, financial model, covenant packages, and the story that strategic and financial buyers expect.",
     forWhom: [
       "PE sponsors planning an exit in the next 12–24 months",
       "Founder-led companies considering a sale",
@@ -175,7 +175,7 @@ export const services = [
     title: "Acquisition Integration",
     tagline: "Day-one finance integration that holds up under sponsor scrutiny.",
     description:
-      "Post-acquisition finance integration — systems, reporting, and operating cadence aligned to sponsor standards from day one.",
+      "Post-acquisition finance integration that aligns systems, reporting, and operating cadence to sponsor standards from day one.",
     forWhom: [
       "PE sponsors completing add-on acquisitions",
       "Acquirers integrating a target's finance function",
@@ -196,7 +196,7 @@ export const services = [
     title: "AI for Finance & Admin",
     tagline: "Practical AI that removes repetitive finance work.",
     description:
-      "AI-powered AP automation, document processing, and workflow automation built on Microsoft Power Automate and AI Builder — deployed where ROI is clear.",
+      "AI-powered AP automation, document processing, and workflow automation built on Microsoft Power Automate and AI Builder, deployed where ROI is clear.",
     forWhom: [
       "Finance teams with high-volume AP or document work",
       "Operators who want AI embedded in existing Microsoft stack",
@@ -220,7 +220,7 @@ export const industries = [
     title: "Manufacturing",
     tagline: "Cost, covenant, and capex intelligence for multi-site manufacturers.",
     description:
-      "We've supported automotive parts manufacturers and other industrial operators with 40,000+ SKUs, $500M+ loan portfolios, and $38M+ capex programs — bringing costing discipline and real-time operational visibility to PE-backed and founder-led businesses.",
+      "We've supported automotive parts manufacturers and other industrial operators with 40,000+ SKUs, $500M+ loan portfolios, and $38M+ capex programs, bringing costing discipline and real-time operational visibility to PE-backed and founder-led businesses.",
     expertise: [
       "Product costing across materials, labor, and overheads",
       "Standard vs actual variance analysis at SKU level",
@@ -237,7 +237,7 @@ export const industries = [
     title: "SaaS & Subscription",
     tagline: "The finance function Series A through growth-stage investors expect.",
     description:
-      "ARR, cohorts, CAC payback, and ASC 606-compliant revenue — translated into board-ready reporting and real-time operator dashboards.",
+      "ARR, cohorts, CAC payback, and ASC 606-compliant revenue, translated into board-ready reporting and real-time operator dashboards.",
     expertise: [
       "ARR and MRR waterfalls with net revenue retention",
       "Churn, CAC payback, and LTV:CAC analytics",
@@ -254,7 +254,7 @@ export const industries = [
     title: "Real Estate & Property Management",
     tagline: "Yardi-integrated multi-entity reporting for PE-backed portfolios.",
     description:
-      "Senior living, student living, and commercial portfolio finance — from Yardi integration to distribution waterfalls and investor-ready reporting.",
+      "Senior living, student living, and commercial portfolio finance, from Yardi integration to distribution waterfalls and investor-ready reporting.",
     expertise: [
       "Yardi integration and reporting automation",
       "Multi-entity consolidation across property portfolios",
@@ -271,7 +271,7 @@ export const industries = [
     title: "Healthcare & Compounding Pharmacy",
     tagline: "Operational finance for regulated, inventory-heavy healthcare businesses.",
     description:
-      "Healthcare finance across compounding pharmacy, clinics, and multi-site operators — balancing regulatory compliance with margin and inventory discipline.",
+      "Healthcare finance across compounding pharmacy, clinics, and multi-site operators, balancing regulatory compliance with margin and inventory discipline.",
     expertise: [
       "Compounding pharmacy operational finance",
       "Inventory management with expiry-date tracking",
@@ -288,7 +288,7 @@ export const industries = [
     title: "E-commerce & CPG",
     tagline: "Channel, pricing, and contribution margin intelligence.",
     description:
-      "Shopify, Amazon, and D2C operators — with channel-mix, ACOS, and pricing frameworks that tell you where the next dollar of growth actually comes from.",
+      "Shopify, Amazon, and D2C operators, served with channel-mix, ACOS, and pricing frameworks that tell you where the next dollar of growth actually comes from.",
     expertise: [
       "Shopify, Amazon, HubSpot, and Salesforce integration",
       "Channel-mix and contribution margin analysis",
@@ -303,9 +303,9 @@ export const industries = [
   {
     slug: "fashion-apparel",
     title: "Fashion & Apparel",
-    tagline: "Global sourcing, channel complexity, and SAP — all in finance view.",
+    tagline: "Global sourcing, channel complexity, and SAP, all in finance view.",
     description:
-      "Fashion and apparel businesses with cross-border sourcing, multi-channel distribution, and SAP-level complexity — translated into decision-ready reporting.",
+      "Fashion and apparel businesses with cross-border sourcing, multi-channel distribution, and SAP-level complexity, all translated into decision-ready reporting.",
     expertise: [
       "Global supply chain finance across China and Vietnam sourcing",
       "Cross-border FX and duty management",
@@ -322,7 +322,7 @@ export const industries = [
     title: "Private Equity Fund Operations",
     tagline: "Sponsor-level reporting and portfolio company oversight.",
     description:
-      "Fund-level reporting and portfolio company oversight — value creation plan tracking, covenant monitoring, and standardized reporting across the book.",
+      "Fund-level reporting and portfolio company oversight, spanning value creation plan tracking, covenant monitoring, and standardized reporting across the book.",
     expertise: [
       "Sponsor-level reporting and portfolio analytics",
       "Portfolio company finance oversight and standardization",
@@ -339,7 +339,7 @@ export const industries = [
 export const caseStudies = [
   {
     slug: "fleet-fuel-fintech",
-    title: "Fleet Fuel Fintech — Business Model Analysis",
+    title: "Fleet Fuel Fintech: Business Model Analysis",
     summary:
       "A 5-year, three-scenario financial model and competitive analysis for a fintech startup building a fleet fuel card and AI-powered fuel management SaaS platform.",
     industry: "SaaS & Fintech",
@@ -350,9 +350,9 @@ export const caseStudies = [
   },
   {
     slug: "northroam-rv-dashboard",
-    title: "NorthRoam RV Rentals — Financial Dashboard",
+    title: "NorthRoam RV Rentals: Financial Dashboard",
     summary:
-      "An interactive financial dashboard covering revenue, expenses, fleet utilization, and profitability metrics — built to give operators real-time visibility across the fleet.",
+      "An interactive financial dashboard covering revenue, expenses, fleet utilization, and profitability metrics, built to give operators real-time visibility across the fleet.",
     industry: "Travel & Leisure",
     anonymized: false,
     hasEmbed: true,
@@ -360,15 +360,15 @@ export const caseStudies = [
   },
   {
     slug: "manufacturing-transformation",
-    title: "Automotive Parts Manufacturer — Finance Transformation",
+    title: "Automotive Parts Manufacturer: Finance Transformation",
     summary:
-      "A $100M+ automotive parts manufacturer modernized for PE reporting — month-end close compressed from multi-day to single day, and $38M capex approved.",
+      "A $100M+ automotive parts manufacturer modernized for PE reporting. Month-end close was compressed from multi-day to single day, and $38M capex was approved.",
     industry: "Manufacturing",
     anonymized: true,
   },
   {
     slug: "compounding-pharmacy-automation",
-    title: "Compounding Pharmacy — Power BI Automation for Financial Reporting",
+    title: "Compounding Pharmacy: Power BI Automation for Financial Reporting",
     summary:
       "Power BI automation for monthly financials, budget-to-actual variance analysis, and polished external reporting that enhanced credibility with major pharmacy chain partners.",
     industry: "Healthcare",
@@ -380,7 +380,7 @@ export const powerBiReports = [
   {
     title: "Retail Business Dashboard",
     description:
-      "A multi-location retail operator view — sales, margin, channel mix, and period-over-period comparisons in a single decision-ready pane.",
+      "A multi-location retail operator view bringing sales, margin, channel mix, and period-over-period comparisons into a single decision-ready pane.",
     src: "https://app.powerbi.com/view?r=eyJrIjoiZjJmYWQ0YzctNGZmNC00NGE5LTkxMGUtOGU1NzYxN2FjNGEwIiwidCI6ImI1MDJkZDY4LTkzMGQtNDE0MC05MjJlLThhMzhmZjJmZmRhNCJ9",
   },
   {
@@ -392,13 +392,13 @@ export const powerBiReports = [
   {
     title: "Financial Statements Dashboard",
     description:
-      "Board-ready P&L, balance sheet, and cash flow with variance to budget and prior year — drill into any line down to transaction detail.",
+      "Board-ready P&L, balance sheet, and cash flow with variance to budget and prior year, letting you drill into any line down to transaction detail.",
     src: "https://app.powerbi.com/view?r=eyJrIjoiODAyZjkyZjItOWQxOS00MTBkLTkxZWEtYjhkNzNlOGVmMGYwIiwidCI6ImI1MDJkZDY4LTkzMGQtNDE0MC05MjJlLThhMzhmZjJmZmRhNCJ9",
   },
   {
     title: "Inventory Analysis Dashboard",
     description:
-      "SKU-level inventory performance — turns, aging, stockouts, and obsolescence risk across locations and product families.",
+      "SKU-level inventory performance covering turns, aging, stockouts, and obsolescence risk across locations and product families.",
     src: "https://app.powerbi.com/view?r=eyJrIjoiZGIxOThjOWYtYjk2NC00MjM5LThmYTMtZjAwNjk1MjhjZTZmIiwidCI6ImI1MDJkZDY4LTkzMGQtNDE0MC05MjJlLThhMzhmZjJmZmRhNCJ9",
   },
 ];

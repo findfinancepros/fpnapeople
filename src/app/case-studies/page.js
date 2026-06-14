@@ -6,7 +6,7 @@ import { caseStudies } from "@/data/site";
 export const metadata = {
   title: "Case Studies | Fractional CFO & Power BI Automation",
   description:
-    "Selected client work — fintech models, Power BI dashboards, finance transformation, and compounding pharmacy automation. Real outcomes from FPnA People.",
+    "Selected client work spanning fintech models, Power BI dashboards, finance transformation, and compounding pharmacy automation. Real outcomes from FPnA People.",
   alternates: { canonical: "/case-studies" },
 };
 
@@ -21,7 +21,7 @@ export default function CaseStudiesIndex() {
           </h1>
           <p className="mt-6 max-w-3xl text-lg text-cream-200/75">
             Real businesses. Real outcomes. Where confidentiality allows, we share the
-            detail — including interactive dashboards and downloadable models.
+            detail, including interactive dashboards and downloadable models.
           </p>
         </div>
       </section>

@@ -6,7 +6,7 @@ import { getSortedPosts } from "@/data/posts";
 export const metadata = {
   title: "Insights & Writing | FPnA People",
   description:
-    "Insights on PE advisory, fractional CFO strategy, Power BI automation, and FP&A — from Fahad Younus, CPA, FCA.",
+    "Insights on PE advisory, fractional CFO strategy, Power BI automation, and FP&A, from Fahad Younus, CPA, FCA.",
   alternates: { canonical: "/blog" },
 };
 
@@ -31,7 +31,7 @@ export default function BlogPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-cream-200/75">
             Practical notes on PE advisory, fractional CFO work, and the reporting stacks that
-            support real decision-making — written from inside the work, not from the outside.
+            support real decision-making, written from inside the work, not from the outside.
           </p>
         </div>
       </section>

@@ -1,15 +1,15 @@
 export const caseStudyDetails = {
   "fleet-fuel-fintech": {
-    title: "Fleet Fuel Fintech — Business Model Analysis",
+    title: "Fleet Fuel Fintech: Business Model Analysis",
     industry: "SaaS & Fintech",
     challenge:
-      "A fintech startup building a fleet fuel card and AI-powered fuel management SaaS platform needed a defensible, investor-ready business model — not a back-of-napkin pitch — to test scenarios, stress-test assumptions, and anchor fundraising conversations.",
+      "A fintech startup building a fleet fuel card and AI-powered fuel management SaaS platform needed a defensible, investor-ready business model, not a back-of-napkin pitch, to test scenarios, stress-test assumptions, and anchor fundraising conversations.",
     approach: [
       "Built a comprehensive 5-year financial model with three scenarios: Conservative, Base Case, and Blitz Scale",
       "Ran a competitive landscape analysis across 10+ players in the fleet fuel card and fleet management SaaS space",
-      "Modeled the revenue engine — interchange, SaaS, and premium service tiers — with sensitivity ranking on key assumptions",
+      "Modeled the revenue engine across interchange, SaaS, and premium service tiers, with sensitivity ranking on key assumptions",
       "Built a detailed OpEx schedule by category including engineering, GTM, customer success, and G&A",
-      "Mapped the finance stack — accounting, billing, reconciliation, and reporting — recommended for each stage of growth",
+      "Mapped the finance stack of accounting, billing, reconciliation, and reporting recommended for each stage of growth",
     ],
     highlights: [
       "5-year integrated financial model across three scenarios",
@@ -19,21 +19,21 @@ export const caseStudyDetails = {
       "Finance stack and reporting architecture recommendations",
     ],
     outcome:
-      "The client walked into investor conversations with a model that held up to scrutiny — defendable assumptions, clear unit economics, and a narrative that tied business model to capital need.",
+      "The client walked into investor conversations with a model that held up to scrutiny: defendable assumptions, clear unit economics, and a narrative that tied business model to capital need.",
     download: {
       href: "/downloads/Fleet-OS-Fintech-Model.xlsx",
       label: "Download the Full Model (.xlsx)",
-      note: "The Excel model used in this engagement — take it for a spin.",
+      note: "The Excel model used in this engagement. Take it for a spin.",
     },
   },
 
   "northroam-rv-dashboard": {
-    title: "NorthRoam RV Rentals — Financial Dashboard",
+    title: "NorthRoam RV Rentals: Financial Dashboard",
     industry: "Travel & Leisure",
     anonymized: true,
     note: "NorthRoam is an anonymized name. Client details have been changed to protect confidentiality.",
     challenge:
-      "An RV rental operator was flying blind between month-ends — revenue, fleet utilization, and expense performance all lived in disconnected spreadsheets that didn't refresh until the accountant got around to it.",
+      "An RV rental operator was flying blind between month-ends. Revenue, fleet utilization, and expense performance all lived in disconnected spreadsheets that didn't refresh until the accountant got around to it.",
     approach: [
       "Built an interactive financial dashboard covering revenue, expenses, fleet utilization, and profitability",
       "Automated the data pipeline so the dashboard refreshes without manual intervention",
@@ -47,14 +47,14 @@ export const caseStudyDetails = {
       "Expense breakdown and drift analytics",
     ],
     outcome:
-      "Operational decisions — pricing, fleet additions, expense control — moved from quarterly retrospectives to weekly, data-backed conversations.",
+      "Operational decisions across pricing, fleet additions, and expense control moved from quarterly retrospectives to weekly, data-backed conversations.",
     embed: {
       href: "/dashboards/northroam_dashboard.html",
     },
   },
 
   "manufacturing-transformation": {
-    title: "Automotive Parts Manufacturer — Finance Transformation",
+    title: "Automotive Parts Manufacturer: Finance Transformation",
     industry: "Manufacturing",
     anonymized: true,
     challenge:
@@ -78,7 +78,7 @@ export const caseStudyDetails = {
   },
 
   "compounding-pharmacy-automation": {
-    title: "Compounding Pharmacy — Power BI Automation for Financial Reporting",
+    title: "Compounding Pharmacy: Power BI Automation for Financial Reporting",
     industry: "Healthcare",
     anonymized: true,
     challenge:
@@ -97,7 +97,7 @@ export const caseStudyDetails = {
       "Credibility-building package that supported expanded partnerships",
     ],
     outcome:
-      "Monthly reporting went from manual workbook assembly to automated Power BI delivery. Leadership gained real-time variance visibility, and the external reporting package enhanced credibility with major pharmacy chains — directly supporting expanded partnership relationships.",
+      "Monthly reporting went from manual workbook assembly to automated Power BI delivery. Leadership gained real-time variance visibility, and the external reporting package enhanced credibility with major pharmacy chains, directly supporting expanded partnership relationships.",
   },
 };
 
