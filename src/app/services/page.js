@@ -6,7 +6,7 @@ import { services } from "@/data/site";
 export const metadata = {
   title: "Fractional CFO, Power BI Automation & FP&A Services",
   description:
-    "Fractional CFO, controller, bookkeeping, FP&A consulting, Power BI automation, ERP advisory, exit readiness, and AI for finance — PE-backed and growth companies.",
+    "Fractional CFO, controller, bookkeeping, FP&A consulting, Power BI automation, ERP advisory, exit readiness, and AI for finance, built for PE-backed and growth companies.",
   alternates: { canonical: "/services" },
 };
 

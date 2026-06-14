@@ -6,7 +6,7 @@ import { site } from "@/data/site";
 export const metadata = {
   title: "Fahad Younus CPA FCA | Fractional CFO Toronto | FPnA People",
   description:
-    "Fahad Younus, CPA, FCA — Toronto-based fractional CFO and founder of FPnA People Inc. 15+ years, ex-KPMG. Strategic finance, Power BI, and AI for growth companies.",
+    "Fahad Younus, CPA, FCA, is a Toronto-based fractional CFO and founder of FPnA People Inc. 15+ years, ex-KPMG. Strategic finance, Power BI, and AI for growth companies.",
   alternates: { canonical: "/about" },
 };
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
         <div className="container-x py-24 md:py-32">
           <p className="eyebrow mb-4">About</p>
           <h1 className="heading-serif max-w-4xl text-5xl leading-tight md:text-6xl lg:text-7xl">
-            A finance firm built to amplify internal teams — not sideline them.
+            A finance firm built to amplify internal teams, not sideline them.
           </h1>
           <p className="mt-8 max-w-3xl text-xl leading-relaxed text-cream-200/80">
             FPnA People Inc. is a Toronto-based finance advisory and automation firm working with
@@ -32,19 +32,19 @@ export default function AboutPage() {
           <div>
             <p className="eyebrow mb-4">Philosophy</p>
             <h2 className="heading-serif text-4xl leading-tight md:text-5xl">
-              The best finance outcomes happen when internal teams are empowered — not sidelined.
+              The best finance outcomes happen when internal teams are empowered, not sidelined.
             </h2>
           </div>
           <div className="space-y-5 text-lg leading-relaxed text-cream-200/80">
             <p>
-              Traditional advisory often leaves the client dependent. We do the opposite — we embed
+              Traditional advisory often leaves the client dependent. We do the opposite. We embed
               senior finance capability, implement the systems and frameworks that make the function
               run, and transfer ownership so the improvement compounds long after we're gone.
             </p>
             <p>
               That's why engagements scale up and down. We come in heavy to solve the hard problem,
               then step back to an advisory cadence. If your team has taken ownership of a dashboard,
-              a close process, or a reporting pack we built, that's a win — not lost revenue.
+              a close process, or a reporting pack we built, that's a win, not lost revenue.
             </p>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-sm border border-gold-500/20 bg-ink-700">
               <Image
                 src="/images/fahad-younus.jpg"
-                alt="Fahad Younus, CPA, FCA — Founder of FPnA People Inc."
+                alt="Fahad Younus, CPA, FCA, Founder of FPnA People Inc."
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"

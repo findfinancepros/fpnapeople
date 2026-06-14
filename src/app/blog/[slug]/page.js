@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
           url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: "FPnA People — Strategic Finance Advisory & Automation",
+          alt: "FPnA People: Strategic Finance Advisory & Automation",
         },
       ],
     },
@@ -158,8 +158,8 @@ export default function BlogPostPage({ params }) {
                 Want to discuss how this applies to your portfolio company?
               </h3>
               <p className="mt-4 text-cream-200/75">
-                A 30-minute conversation is usually enough to know whether we can help. No pitch,
-                no slides — just a direct read of where you are and what the next move looks like.
+                A 30-minute conversation is usually enough to know whether we can help. No pitch
+                and no slides, just a direct read of where you are and what the next move looks like.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
