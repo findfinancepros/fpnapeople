@@ -49,7 +49,7 @@ export default async function ClientsPage({ searchParams }) {
         <p className="mt-6 max-w-xl text-[#9A3A22]">Sign-in did not complete. Please try again.</p>
       ) : null}
       <p className="mt-6 max-w-xl text-[#4B5650]">
-        Enter the email address your invitation was sent to. We will email you a one-time code.
+        Sign in with the email address and password provided to you.
       </p>
       <div className="mt-10">
         <SignInButton callbackUrl={callbackUrl || "/clients"} />

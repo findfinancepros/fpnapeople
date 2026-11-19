@@ -38,7 +38,8 @@ export default async function ClientPortalPage({ params }) {
           </p>
           <h2 className="mt-4 text-3xl text-[#1C3422] md:text-4xl" style={SERIF}>Sign in to view your reports</h2>
           <p className="mt-6 text-[#465B51]">
-            Enter the email address your invitation was sent to. We will email you a one-time code. No password is needed.
+            Sign in with the email address and password provided to you. If you have forgotten your password,
+            choose &ldquo;Forgot password?&rdquo; on the next screen.
           </p>
           <div className="mt-10">
             <SignInButton callbackUrl={`/clients/${slug}`} />
