@@ -126,25 +126,29 @@ body {
   }
 }
 
-/* Client portal: full screen view keeps the client background and fits the report to the screen. */
+/* Client portal: full screen view fills the whole screen on the client background.
+   Kept as separate rules so a browser that lacks one selector still applies the other. */
 .portal-frame:fullscreen {
   background: #FBF0E2;
   border: 0;
   border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 .portal-frame:fullscreen .portal-report {
-  width: min(100vw, calc(100vh * 1280 / 760));
-  height: auto;
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
 }
 .portal-frame:-webkit-full-screen {
   background: #FBF0E2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  width: 100vw;
+  height: 100vh;
 }
 .portal-frame:-webkit-full-screen .portal-report {
-  width: min(100vw, calc(100vh * 1280 / 760));
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
 }
