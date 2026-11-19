@@ -125,3 +125,30 @@ body {
       linear-gradient(180deg, #0f1422 0%, #0a0e1a 100%);
   }
 }
+
+/* Client portal: full screen view fills the whole screen on the client background.
+   Kept as separate rules so a browser that lacks one selector still applies the other. */
+.portal-frame:fullscreen {
+  background: #FBF0E2;
+  border: 0;
+  border-radius: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.portal-frame:fullscreen .portal-report {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+}
+.portal-frame:-webkit-full-screen {
+  background: #FBF0E2;
+  border: 0;
+  border-radius: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.portal-frame:-webkit-full-screen .portal-report {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+}

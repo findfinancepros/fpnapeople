@@ -1,7 +1,5 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
+import SiteChrome from "@/components/SiteChrome";
 import { site } from "@/data/site";
 
 export const metadata = {
@@ -61,10 +59,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <Navbar />
-        <main className="pt-20">{children}</main>
-        <Footer />
-        <BackToTop />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
