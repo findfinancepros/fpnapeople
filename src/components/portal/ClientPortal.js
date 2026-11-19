@@ -11,6 +11,7 @@ export default function ClientPortal({ client, reports, accent }) {
   const [error, setError] = useState(null);
   const [ready, setReady] = useState(false);
   const reportRef = useRef(null);
+  const frameRef = useRef(null);
 
   useEffect(() => {
     if (!active) return;
@@ -30,11 +31,16 @@ export default function ClientPortal({ client, reports, accent }) {
     return () => { cancelled = true; };
   }, [client, active]);
 
+  // Full screen the branded frame (not the bare report) so the report sits on the
+  // client's background instead of the browser's default black.
   const goFullScreen = () => {
-    try {
+    const el = frameRef.current;
+    if (!el) return;
+    const request = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (request) {
+      Promise.resolve(request.call(el)).catch(() => reportRef.current?.fullscreen());
+    } else {
       reportRef.current?.fullscreen();
-    } catch {
-      /* the browser blocked full screen; nothing else to do */
     }
   };
 
@@ -70,7 +76,11 @@ export default function ClientPortal({ client, reports, accent }) {
           Full screen
         </button>
       </div>
-      <div className="mt-4 overflow-hidden rounded-md border border-[#DDD7C9] bg-white" style={{ borderTop: `3px solid ${accent}` }}>
+      <div
+        ref={frameRef}
+        className="portal-frame mt-4 overflow-hidden rounded-md border border-[#DDD7C9] bg-white"
+        style={{ borderTop: `3px solid ${accent}` }}
+      >
         {error ? (
           <p className="p-10 text-[#9A3A22]">{error}</p>
         ) : cfg ? (

@@ -5,7 +5,7 @@ import { models } from "powerbi-client";
 
 export default function ReportEmbed({ cfg, onReady }) {
   return (
-    <div className="aspect-[1280/760] w-full">
+    <div className="portal-report aspect-[1280/760] w-full">
       <PowerBIEmbed
         embedConfig={{
           type: "report",
