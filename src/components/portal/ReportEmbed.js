@@ -3,7 +3,7 @@
 import { PowerBIEmbed } from "powerbi-client-react";
 import { models } from "powerbi-client";
 
-export default function ReportEmbed({ cfg }) {
+export default function ReportEmbed({ cfg, onReady }) {
   return (
     <div className="aspect-[1280/760] w-full">
       <PowerBIEmbed
@@ -19,6 +19,9 @@ export default function ReportEmbed({ cfg }) {
             bars: { actionBar: { visible: false } },
             background: models.BackgroundType.Transparent,
           },
+        }}
+        getEmbeddedComponent={(report) => {
+          onReady?.(report);
         }}
         cssClassName="h-full w-full"
       />

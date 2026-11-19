@@ -2,9 +2,13 @@
 
 import { signIn } from "next-auth/react";
 
-export default function SignInButton({ callbackUrl = "/clients" }) {
+export default function SignInButton({ callbackUrl = "/clients", color = "#1C3422" }) {
   return (
-    <button className="btn-primary" onClick={() => signIn("fpna-clients", { callbackUrl })}>
+    <button
+      className="inline-flex items-center justify-center rounded-sm px-6 py-3 font-medium text-[#FBF0E2] transition-opacity hover:opacity-90"
+      style={{ background: color }}
+      onClick={() => signIn("fpna-clients", { callbackUrl })}
+    >
       Sign in with email
     </button>
   );
