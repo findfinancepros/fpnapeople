@@ -5,7 +5,14 @@ import dynamic from "next/dynamic";
 
 const ReportEmbed = dynamic(() => import("./ReportEmbed"), { ssr: false });
 
-export default function ClientPortal({ client, reports, accent }) {
+// Bear & Bison colours unless the portal passes its own theme.
+const DEFAULTS = {
+  bg: "#FBF0E2", muted: "#465B51", border: "#DDD7C9", heading: "#1C3422",
+  tabBg: "#FFFBF4", tabText: "#1C3422", tabActiveBg: "#1C3422", tabActiveText: "#FBF0E2",
+};
+
+export default function ClientPortal({ client, reports, accent, theme }) {
+  const t = { ...DEFAULTS, ...(theme || {}) };
   const [active, setActive] = useState(reports[0]?.key);
   const [cfg, setCfg] = useState(null);
   const [error, setError] = useState(null);
@@ -55,8 +62,8 @@ export default function ClientPortal({ client, reports, accent }) {
               className="rounded-sm border px-4 py-2 text-sm transition-colors"
               style={
                 r.key === active
-                  ? { background: "#1C3422", color: "#FBF0E2", borderColor: "#1C3422" }
-                  : { background: "#FFFBF4", color: "#1C3422", borderColor: "#DDD7C9" }
+                  ? { background: t.tabActiveBg, color: t.tabActiveText, borderColor: t.tabActiveBg }
+                  : { background: t.tabBg, color: t.tabText, borderColor: t.border }
               }
               title={r.description}
             >
@@ -67,7 +74,8 @@ export default function ClientPortal({ client, reports, accent }) {
         <button
           onClick={goFullScreen}
           disabled={!ready}
-          className="inline-flex items-center gap-2 rounded-sm border border-[#1C3422]/30 bg-[#FFFBF4] px-4 py-2 text-sm text-[#1C3422] transition-colors hover:bg-[#1C3422]/5 disabled:opacity-40"
+          className="portal-outline-btn inline-flex items-center gap-2 rounded-sm border px-4 py-2 text-sm transition-colors disabled:opacity-40"
+          style={{ background: t.tabBg, color: t.tabText, borderColor: `color-mix(in srgb, ${t.tabText} 30%, transparent)`, "--hover": t.tabText }}
           title="View the report full screen. Press Esc to exit."
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -78,8 +86,8 @@ export default function ClientPortal({ client, reports, accent }) {
       </div>
       <div
         ref={frameRef}
-        className="portal-frame mt-4 overflow-hidden rounded-md border border-[#DDD7C9] bg-white"
-        style={{ borderTop: `3px solid ${accent}` }}
+        className="portal-frame mt-4 overflow-hidden rounded-md border bg-white"
+        style={{ borderColor: t.border, borderTop: `3px solid ${accent}`, "--portal-bg": t.bg }}
       >
         {error ? (
           <p className="p-10 text-[#9A3A22]">{error}</p>

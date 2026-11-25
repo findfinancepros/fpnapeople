@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
-import { portals } from "@/data/portals";
+import { portals, portalPath } from "@/data/portals";
 import SignInButton from "@/components/portal/SignInButton";
 import SignOutButton from "@/components/portal/SignOutButton";
 
@@ -20,8 +20,8 @@ export default async function ClientsPage({ searchParams }) {
 
   if (session) {
     const mine = Object.entries(portals).filter(([, p]) => session.user.roles?.includes(p.role));
-    if (callbackUrl?.startsWith("/clients/")) redirect(callbackUrl);
-    if (mine.length === 1) redirect(`/clients/${mine[0][0]}`);
+    if (callbackUrl?.startsWith("/clients/") || callbackUrl === "/demo") redirect(callbackUrl);
+    if (mine.length === 1) redirect(portalPath(mine[0][0]));
     return (
       <section className="flex min-h-screen flex-col items-center justify-center bg-[#F7F4EE] px-6 text-center text-[#1F2A24]">
         <h1 className="text-3xl" style={SERIF}>Your reporting</h1>
@@ -33,7 +33,7 @@ export default async function ClientsPage({ searchParams }) {
         ) : (
           <ul className="mt-8 space-y-3">
             {mine.map(([slug, p]) => (
-              <li key={slug}><a href={`/clients/${slug}`} className="underline">{p.name}</a></li>
+              <li key={slug}><a href={portalPath(slug)} className="underline">{p.name}</a></li>
             ))}
           </ul>
         )}
@@ -41,6 +41,9 @@ export default async function ClientsPage({ searchParams }) {
       </section>
     );
   }
+
+  // A failed sign-in from the demo portal goes back there, with its own branding.
+  if (callbackUrl === "/demo" || (callbackUrl || "").endsWith("/demo")) redirect("/demo");
 
   return (
     <section className="flex min-h-screen flex-col items-center justify-center bg-[#F7F4EE] px-6 text-center text-[#1F2A24]">
