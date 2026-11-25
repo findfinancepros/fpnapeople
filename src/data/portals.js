@@ -57,9 +57,10 @@ export const portals = {
     signInText: "Sign in with the demo email address and password shared with you.",
     accent: "#d4a853",
     disclaimer:
-      "Illustrative sample prepared by FPnA People Inc. The fund, portfolio companies, people and figures are fictional.",
+      "Sample prepared by FPnA People Inc. The fund, portfolio companies, people and figures are fictional.",
     theme: {
       bg: "#0a0e1a",
+      frameBg: "#F4F7F9", // full screen background, matches the light report pages
       text: "#f5f1e8",
       heading: "#f5f1e8",
       muted: "#b9b2a3",
@@ -79,20 +80,26 @@ export const portals = {
       {
         key: "fund",
         title: "Fund reporting pack",
-        description: "Fund performance, capital, portfolio view, KPIs, covenants and impact.",
-        reportId: "732d9824-58e9-45fa-8794-9b201ae1e2e5",
+        description: "Fund performance, capital, portfolio view, KPIs, covenants and ESG.",
+        reportId: "a8605302-0d62-444a-bff3-38335f1928be",
       },
       {
-        key: "aspen-ridge",
-        title: "Company pack: Aspen Ridge Mechanical",
-        description: "Monthly reporting pack for a field services portfolio company.",
-        reportId: "afe82689-7d5b-4795-a844-e83fbb3d6698",
+        key: "keystone",
+        title: "Keystone Climate Services",
+        description: "Monthly reporting pack for a commercial HVAC and building services company.",
+        reportId: "05676c57-dd72-451b-9cc1-52d68af3f722",
       },
       {
-        key: "northfork",
-        title: "Company pack: Northfork Precision Fabrication",
-        description: "Monthly reporting pack for a manufacturing portfolio company.",
-        reportId: "499ec57e-ddb4-4701-a20c-f5651de6e5c0",
+        key: "ridgeline",
+        title: "Ridgeline Precision Components",
+        description: "Monthly reporting pack for a precision manufacturing company.",
+        reportId: "59d8c372-98e0-4c3a-94c2-9b2d4f21cfde",
+      },
+      {
+        key: "bayside",
+        title: "Bayside Health Partners",
+        description: "Monthly reporting pack for a community hospital and primary care group.",
+        reportId: "072badec-e39f-464e-b730-7e500ef55981",
       },
     ],
   },

@@ -87,7 +87,7 @@ export default function ClientPortal({ client, reports, accent, theme }) {
       <div
         ref={frameRef}
         className="portal-frame mt-4 overflow-hidden rounded-md border bg-white"
-        style={{ borderColor: t.border, borderTop: `3px solid ${accent}`, "--portal-bg": t.bg }}
+        style={{ borderColor: t.border, borderTop: `3px solid ${accent}`, "--portal-bg": t.frameBg || t.bg }}
       >
         {error ? (
           <p className="p-10 text-[#9A3A22]">{error}</p>
